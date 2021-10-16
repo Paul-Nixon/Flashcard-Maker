@@ -1,0 +1,38 @@
+*, *::before, *::after
+{
+    box-sizing: border-box;
+    margin-top: 0;
+}
+
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    font-size: 100%; /* To set the rem equal to any browser's default font-size */
+}
+
+body
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+button
+{
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    outline: none;
+    border-radius: 1.875rem;
+}
