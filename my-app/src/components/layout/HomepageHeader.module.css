@@ -7,3 +7,74 @@
     height: 3.75rem;
     padding: 0.5rem 0;
 }
+
+.logo
+{
+    margin-left: 1rem;
+    font-size: clamp(1rem, 0.5vw, 1.875rem);
+    color: white;
+}
+
+.internalLinks
+{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.websiteLinks
+{
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.websiteLink
+{
+    font-size: 0.875rem;
+    color: white;
+}
+
+.websiteLink:hover
+{
+    text-decoration: underline;
+}
+
+.websiteLink + .websiteLink
+{
+    margin-left: 0.5rem;
+}
+
+.accountLinks
+{
+    display: flex;
+    align-items: center;
+}
+
+.headerBtn
+{
+    font-size: 1.25rem;
+    color: white;
+}
+
+.headerBtn:first-of-type
+{
+    background-color: transparent;
+    transition: background-color 250ms ease-in-out;
+}
+
+.headerBtn:first-of-type:hover
+{
+    color: blue;
+    background-color: white;
+}
+
+.headerBtn:last-of-type
+{
+    background-color: orange;
+}
+
+.headerBtn:last-of-type:hover
+{
+    background-color: #ff8c00;
+}
