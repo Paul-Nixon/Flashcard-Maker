@@ -5,14 +5,15 @@
     justify-content: space-between;
     align-items: center;
     height: 3.75rem;
-    padding: 0.5rem 0;
+    padding: 1rem 0;
 }
 
 .logo
 {
     margin-left: 1rem;
-    font-size: clamp(1rem, 0.5vw, 1.875rem);
+    font-size: clamp(1.125rem, 1.75vw, 1.875rem);
     color: white;
+    font-weight: bold;
 }
 
 .internalLinks
@@ -31,8 +32,10 @@
 
 .websiteLink
 {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: white;
+    font-weight: bold;
+    padding: 0.5rem;
 }
 
 .websiteLink:hover
@@ -53,28 +56,30 @@
 
 .headerBtn
 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: white;
+    border: 2px solid #9a0026;
 }
 
-.headerBtn:first-of-type
+.headerBtn[data-login]
 {
     background-color: transparent;
     transition: background-color 250ms ease-in-out;
+    margin-right: 0.5rem;
 }
 
-.headerBtn:first-of-type:hover
+.headerBtn[data-login]:hover
 {
     color: blue;
     background-color: white;
 }
 
-.headerBtn:last-of-type
+.headerBtn[data-register]
 {
     background-color: orange;
 }
 
-.headerBtn:last-of-type:hover
+.headerBtn[data-register]:hover
 {
     background-color: #ff8c00;
 }

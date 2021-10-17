@@ -2,7 +2,6 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -15,7 +14,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 1.25rem;
+    padding: 0 2.5rem;
+    height: 100%;
 }
 
 .cta
@@ -28,24 +28,27 @@
 .ctaTitle
 {
     color: white;
-    font-size: clamp(1.125rem, 0.5vw, 2rem);
-    margin: 0 0 0.5rem;
-    text-align: center;
+    font-size: clamp(1.5rem, 2.5vw, 2.8125rem);
+    margin: 0 0 0.75rem;
+    text-align: left;
+    word-break: break-all;
 }
 
 .ctaSubtitle
 {
-    color: grey;
-    font-size: clamp(0.875rem, 0.5vw, 1.5rem);
-    text-align: center;
-    margin-bottom: 0.5rem;
+    color: brown;
+    font-size: clamp(1.125rem, 2vw, 2rem);
+    text-align: left;
+    margin-bottom: 1rem;
+    word-break: break-all;
 }
 
 .ctaBtn
 {
-    color: pink;
+    color: yellow;
     background-color: blue;
     font-size: 1.25rem;
+    border: none;
 }
 
 .ctaBtn:hover

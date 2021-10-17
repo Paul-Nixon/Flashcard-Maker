@@ -21,10 +21,10 @@ export default function HomepageHeader() {
 
                 <div className={styles.accountLinks}>
                     <Link to="/login">
-                        <button className={styles.headerBtn}>Login</button>
+                        <button data-login className={styles.headerBtn}>Login</button>
                     </Link>
                     <Link to="/register">
-                        <button className={styles.headerBtn}>Register</button>
+                        <button data-register  className={styles.headerBtn}>Register</button>
                     </Link>
                 </div>
             </div>
