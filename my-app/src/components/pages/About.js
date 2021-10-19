@@ -24,7 +24,7 @@ export default function About() {
                             </ul>
                         </div>
                         
-                        <img />
+                        <img className={styles.aboutImg} src="" alt="" />
                     </div>
 
                     <div className={styles.aboutMainContent}>
@@ -41,7 +41,7 @@ export default function About() {
                             </ul>
                         </div>
 
-                        <img />
+                        <img className={styles.aboutImg} src="" alt="" />
                     </div>
                 </section>
             </div>

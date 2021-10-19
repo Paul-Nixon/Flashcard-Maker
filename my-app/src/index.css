@@ -39,7 +39,7 @@ button
 
 .page-title
 {
-    font-size: ;
-    margin: ;
+    font-size: clamp(1.25rem, 2.186vw, 2.125rem);
+    margin: 0;
     text-align: center;
 }
