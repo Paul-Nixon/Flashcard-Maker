@@ -7,7 +7,11 @@ export default function Contact() {
     return (
         <div className={styles.contactPage}>
             <HomepageHeader />
-            <ContactForm />
+
+            <div className={styles.contactContent}>
+                <h2 className="page-title">Contact</h2>
+                <ContactForm />
+            </div>
         </div>
     )
 }
