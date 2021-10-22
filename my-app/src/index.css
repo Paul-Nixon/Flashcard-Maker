@@ -43,3 +43,10 @@ button
     margin: 0;
     text-align: center;
 }
+
+.form-error-msg
+{
+    color: red;
+    font-size: 0.625rem;
+    display: none;
+}
