@@ -21,6 +21,7 @@
     border: 1px solid #ccc;
     padding: 0.25rem;
     width: 100%;
+    outline: none;
 }
 
 .inputWrapper input:focus, .inputWrapper textarea:focus
@@ -38,6 +39,8 @@
 {
     color: white;
     background-color: #b3002d;
+    border: none;
+    font-size: 1.125rem;
 }
 
 .contactFormActions button:hover

@@ -50,3 +50,17 @@ button
     font-size: 0.625rem;
     display: none;
 }
+
+.close
+{
+    color: gray;
+    float: right;
+    font-size: 1.125rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus
+{
+    color: black;
+}

@@ -13,5 +13,5 @@ export default function useStateWithValidation(validationFunc, initialValue) {
     [validationFunc]
   )
 
-  return [onChange, isValid]
+  return [state, onChange, isValid]
 }
