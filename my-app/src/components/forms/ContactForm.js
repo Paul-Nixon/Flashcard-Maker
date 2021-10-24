@@ -1,7 +1,6 @@
 import styles from './ContactForm.module.css';
 
 import { useState, useRef } from "react";
-import emailjs from 'emailjs-com';
 
 import Card from "../ui/Card";
 import Modal from "../ui/Modal";
@@ -37,12 +36,8 @@ export default function ContactForm() {
         event.preventDefault();
 
         const inputValidators = [nameIsValid, emailIsValid, commentsAreValid];
-        if (inputValidators.every(validator => validator == true))
+        if (inputValidators.every(validator => validator === true))
         {
-            emailjs.sendForm("service_ofxjqws", "template_o5e62j9", formRef.current, "user_7qgQo5htj3QezqP0Ywlm8")
-            .then((result) => {
-                console.log(result.text);
-            }).catch(error => console.log(error));
             modal = <Modal>
                     Your message was successfully sent!
                     <span className="close" onClick={() => {
@@ -62,6 +57,8 @@ export default function ContactForm() {
                         setRenderBackdrop(false);
                     }}>&times;</span>
                 </Modal>
+            setRenderModal(true);
+            setRenderBackdrop(true);
         }
     }
  
@@ -69,7 +66,7 @@ export default function ContactForm() {
     return (
         <Card>
             <form className={styles.contactForm} onSubmit={formHandler} ref={formRef}>
-                <div className={styles.inputWrapper}>
+                <div className="inputWrapper">
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your name" value={clientName} autoFocus="true"
                     onChange={e => {
@@ -88,7 +85,7 @@ export default function ContactForm() {
                     </div>
                 </div>
 
-                <div className={styles.inputWrapper}>
+                <div className="inputWrapper">
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Your email" value={clientEmail}
                     onChange={e => {
@@ -105,7 +102,7 @@ export default function ContactForm() {
                     <div className="form-error-msg" ref={emailErrorMsgRef}>This email is invalid.</div>
                 </div>
 
-                <div className={styles.inputWrapper}>
+                <div className="inputWrapper">
                     <label htmlFor="comments">Comments</label>
                     <textarea rows="5" id="comments" name="message" value={clientComments}
                     placeholder="Enter your comments here..." onChange={e => {
@@ -124,7 +121,7 @@ export default function ContactForm() {
                     </div>
                 </div>
 
-                <div className={styles.contactFormActions}>
+                <div className="contactFormActions">
                     <button>Submit</button>
                 </div>
 
