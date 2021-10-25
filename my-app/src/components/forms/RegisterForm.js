@@ -6,6 +6,7 @@ import Card from "../ui/Card";
 import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
 import useFormValidation from '../custom_hooks/useFormValidation';
+import { useAuth } from "../../contexts/AuthContext";
 
 
 export default function RegisterForm() {
@@ -14,22 +15,54 @@ export default function RegisterForm() {
     passwordErrorMsgRef = useRef(),
     confirmPasswordErrorMsgRef = useRef(),
     [clientEmail, setClientEmail, emailIsValid] = useFormValidation(
-        enteredEmail => enteredEmail.length !== 0 && (enteredEmail.includes("@") && enteredEmail.includes(".com")),
+        email => email.length !== 0 && (email.includes("@") && email.includes(".com")),
         ""
     ),
     [clientPassword, setClientPassword, passwordIsValid] = useFormValidation(
-        enteredPassword => enteredPassword.length !== 0,
+        password => password.length >= 5,
         ""
     ),
     [clientConfirmPassword, setClientConfirmPassword, confirmPasswordIsValid] = useFormValidation(
-        enteredConfirmPassword => enteredConfirmPassword.length !== 0,
+        confirmPassword => confirmPassword === clientPassword,
         ""
     ),
+    [renderModal, setRenderModal] = useState(false),
+    [renderBackdrop, setRenderBackdrop] = useState(false),
+    signup = useAuth();
+    let modal;
     
 
     function formHandler(event)
     {
         event.preventDefault();
+
+        const inputValidators = [emailIsValid, passwordIsValid, confirmPasswordIsValid];
+        if (inputValidators.every(validator => validator))
+        {
+            signup(clientEmail, clientPassword);
+
+            modal = <Modal>
+                New account created!
+                <span className="close" onClick={() => {
+                    setRenderModal(false);
+                    setRenderBackdrop(false);
+                }}>&times;</span>
+            </Modal>
+            setRenderModal(true);
+            setRenderBackdrop(true);
+        }
+        else
+        {
+            modal = <Modal>
+                    One or more of the fields is incorrectly filled.
+                    <span className="close" onClick={() => {
+                        setRenderModal(false);
+                        setRenderBackdrop(false);
+                    }}>&times;</span>
+                </Modal>
+            setRenderModal(true);
+            setRenderBackdrop(true);
+        }
     }
 
 
@@ -37,32 +70,74 @@ export default function RegisterForm() {
         <Card>
             <form className={styles.registerForm} onSubmit={formHandler}>
                 <div className="inputWrapper">
-                    <input htmlFor="email">Email</input>
-                    <input type="email" id="email" placeholder="Your email" />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" placeholder="Your email" autoFocus={true}
+                    value={clientEmail} onChange={e => {
+                        setClientEmail(e.target.value);
+
+                        if (emailIsValid)
+                        {
+                            emailErrorMsgRef.current.style.display = "none";
+                        }
+                        else
+                        {
+                            emailErrorMsgRef.current.style.display = "block";
+                        }
+                    }}/>
                     <div className="form-error-msg" ref={emailErrorMsgRef}>
                         The email you entered is invalid.
                     </div>
                 </div>
 
                 <div className="inputWrapper">
-                    <input htmlFor="password">Email</input>
-                    <input type="password" id="password" placeholder="Enter a password" />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter a password"
+                    onChange={e => {
+                        setClientPassword(e.target.value);
+
+                        if (passwordIsValid)
+                        {
+                            passwordErrorMsgRef.current.style.display = "none";
+                        }
+                        else
+                        {
+                            passwordErrorMsgRef.current.style.display = "block";
+                        }
+                    }} />
                     <div className="form-error-msg" ref={passwordErrorMsgRef}>
-                        The Password field cannot be empty.
+                        The password must be at least 5 characters.
                     </div>
                 </div>
 
                 <div className="inputWrapper">
-                    <input htmlFor="confirmPassword">Confirm Password</input>
-                    <input type="password" id="confirmPassword" placeholder="Re-enter password" />
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Re-enter password"
+                    value={clientConfirmPassword} onChange={e => {
+                        setClientConfirmPassword(e.target.value);
+
+                        if (confirmPasswordIsValid)
+                        {
+                            confirmPasswordErrorMsgRef.current.style.display = "none";
+                        }
+                        else
+                        {
+                            confirmPasswordErrorMsgRef.current.style.display = "block";
+                        }
+                    }} />
                     <div className="form-error-msg" ref={confirmPasswordErrorMsgRef}>
-                        Passwords do not match.
+                        Both passwords do not match.
                     </div>
                 </div>
 
                 <div className="contactFormActions">
                     <button>Confirm</button>
                 </div>
+
+                {renderBackdrop && <Backdrop onCancel={() => {
+                    setRenderModal(false);
+                    setRenderBackdrop(false);
+                }} />}
+                {renderModal && modal}
             </form>
         </Card>
     )

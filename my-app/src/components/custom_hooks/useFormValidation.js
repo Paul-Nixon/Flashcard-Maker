@@ -10,7 +10,7 @@ export default function useStateWithValidation(validationFunc, initialValue) {
       setState(value)
       setIsValid(validationFunc(value))
     },
-    [validationFunc]
+    [validationFunc, state]
   )
 
   return [state, onChange, isValid]
