@@ -1,12 +1,11 @@
 import styles from './RegisterForm.module.css';
 
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 
 import Card from "../ui/Card";
 import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
-import useFormValidation from '../custom_hooks/useFormValidation';
-import { useAuth } from "../../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 
 
 export default function RegisterForm() {
@@ -14,32 +13,25 @@ export default function RegisterForm() {
     const emailErrorMsgRef = useRef(),
     passwordErrorMsgRef = useRef(),
     confirmPasswordErrorMsgRef = useRef(),
-    [clientEmail, setClientEmail, emailIsValid] = useFormValidation(
-        email => email.length !== 0 && (email.includes("@") && email.includes(".com")),
-        ""
-    ),
-    [clientPassword, setClientPassword, passwordIsValid] = useFormValidation(
-        password => password.length >= 5,
-        ""
-    ),
-    [clientConfirmPassword, setClientConfirmPassword, confirmPasswordIsValid] = useFormValidation(
-        confirmPassword => confirmPassword === clientPassword,
-        ""
-    ),
+    emailInputRef = useRef(),
+    passwordInputRef = useRef(),
     [renderModal, setRenderModal] = useState(false),
     [renderBackdrop, setRenderBackdrop] = useState(false),
-    signup = useAuth();
+    [emailIsValid, setEmailIsValid] = useState(false),
+    [passwordIsValid, setPasswordIsValid] = useState(false),
+    [confirmPasswordIsValid, setConfirmPasswordIsValid] = useState(false),
+    authCtx = useContext(AuthContext);
     let modal;
     
 
-    function formHandler(event)
+    async function formHandler(event)
     {
         event.preventDefault();
 
         const inputValidators = [emailIsValid, passwordIsValid, confirmPasswordIsValid];
         if (inputValidators.every(validator => validator))
         {
-            signup(clientEmail, clientPassword);
+            authCtx.addUser(emailInputRef.current.value, passwordInputRef.current.value);
 
             modal = <Modal>
                 New account created!
@@ -50,6 +42,7 @@ export default function RegisterForm() {
             </Modal>
             setRenderModal(true);
             setRenderBackdrop(true);
+            event.target.clear();
         }
         else
         {
@@ -71,17 +64,18 @@ export default function RegisterForm() {
             <form className={styles.registerForm} onSubmit={formHandler}>
                 <div className="inputWrapper">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" placeholder="Your email" autoFocus={true}
-                    value={clientEmail} onChange={e => {
-                        setClientEmail(e.target.value);
-
-                        if (emailIsValid)
+                    <input type="text" id="email" placeholder="Your email" autoFocus={true}
+                    ref={emailInputRef} onChange={e => {
+                        if (e.target.value.length !== 0 && (
+                            e.target.value.includes("@") && e.target.value.includes(".com")))
                         {
                             emailErrorMsgRef.current.style.display = "none";
+                            setEmailIsValid(true);
                         }
                         else
                         {
                             emailErrorMsgRef.current.style.display = "block";
+                            setEmailIsValid(false);
                         }
                     }}/>
                     <div className="form-error-msg" ref={emailErrorMsgRef}>
@@ -92,16 +86,16 @@ export default function RegisterForm() {
                 <div className="inputWrapper">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" placeholder="Enter a password"
-                    onChange={e => {
-                        setClientPassword(e.target.value);
-
-                        if (passwordIsValid)
+                    ref={passwordInputRef} onChange={e => {
+                        if (e.target.value.length >= 5)
                         {
                             passwordErrorMsgRef.current.style.display = "none";
+                            setPasswordIsValid(true);
                         }
                         else
                         {
                             passwordErrorMsgRef.current.style.display = "block";
+                            setPasswordIsValid(false);
                         }
                     }} />
                     <div className="form-error-msg" ref={passwordErrorMsgRef}>
@@ -112,16 +106,17 @@ export default function RegisterForm() {
                 <div className="inputWrapper">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" placeholder="Re-enter password"
-                    value={clientConfirmPassword} onChange={e => {
-                        setClientConfirmPassword(e.target.value);
+                    onChange={e => {
 
-                        if (confirmPasswordIsValid)
+                        if (e.target.value === passwordInputRef.current.value)
                         {
                             confirmPasswordErrorMsgRef.current.style.display = "none";
+                            setConfirmPasswordIsValid(true);
                         }
                         else
                         {
                             confirmPasswordErrorMsgRef.current.style.display = "block";
+                            setConfirmPasswordIsValid(false);
                         }
                     }} />
                     <div className="form-error-msg" ref={confirmPasswordErrorMsgRef}>
