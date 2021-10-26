@@ -42,7 +42,7 @@ export default function RegisterForm() {
             </Modal>
             setRenderModal(true);
             setRenderBackdrop(true);
-            event.target.clear();
+            event.target.reset();
         }
         else
         {

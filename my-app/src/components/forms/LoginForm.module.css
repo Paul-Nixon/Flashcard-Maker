@@ -1,0 +1,12 @@
+.loginOptions
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginForm
+{
+    padding: 2.5rem;
+}

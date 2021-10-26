@@ -5,29 +5,19 @@ import { useState, useRef } from "react";
 import Card from "../ui/Card";
 import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
-import useFormValidation from '../custom_hooks/useFormValidation';
 
 
 export default function ContactForm() {
     
-    const [clientName, setClientName, nameIsValid] = useFormValidation(
-        enteredName => enteredName.length !== 0,
-        ""
-        ),
-    [clientEmail, setClientEmail, emailIsValid] = useFormValidation(
-        enteredEmail => enteredEmail.length !== 0 && (enteredEmail.includes("@") && enteredEmail.includes(".com")),
-        ""
-    ),
-    [clientComments, setClientComments, commentsAreValid] = useFormValidation(
-        enteredComments => enteredComments.length !== 0,
-        ""
-        ),
-    formRef = useRef(),
+    const formRef = useRef(),
     nameErrorMsgRef = useRef(),
     emailErrorMsgRef = useRef(),
     commentsErrorMsgRef = useRef(),
     [renderModal, setRenderModal] = useState(false),
-    [renderBackdrop, setRenderBackdrop] = useState(false);
+    [renderBackdrop, setRenderBackdrop] = useState(false),
+    [nameIsValid, setNameIsValid] = useState(false),
+    [emailIsValid, setEmailIsValid] = useState(false),
+    [commentsAreValid, setCommentsAreValid] = useState(false);
     let modal;
 
 
@@ -36,7 +26,7 @@ export default function ContactForm() {
         event.preventDefault();
 
         const inputValidators = [nameIsValid, emailIsValid, commentsAreValid];
-        if (inputValidators.every(validator => validator === true))
+        if (inputValidators.every(validator => validator))
         {
             modal = <Modal>
                     Your message was successfully sent!
@@ -69,15 +59,16 @@ export default function ContactForm() {
                 <div className="inputWrapper">
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your name" value={clientName} autoFocus="true"
-                    onChange={e => {
-                        setClientName(e.target.value);
-                        if (nameIsValid)
+                    onChange={e => {                       
+                        if (e.target.value.length !== 0)
                         {
                             nameErrorMsgRef.current.style.display = "none";
+                            setNameIsValid(true);
                         }
                         else
                         {
                             nameErrorMsgRef.current.style.display = "block";
+                            setNameIsValid(false);
                         }
                     }} />
                     <div className="form-error-msg" ref={nameErrorMsgRef}>
@@ -90,13 +81,16 @@ export default function ContactForm() {
                     <input type="email" id="email" name="email" placeholder="Your email" value={clientEmail}
                     onChange={e => {
                         setClientEmail(e.target.value);
-                        if (emailIsValid)
+                        if (e.target.value.length !== 0 && (
+                            e.target.value.includes("@") && e.target.value.includes(".com")))
                         {
                             emailErrorMsgRef.current.style.display = "none";
+                            setEmailIsValid(true);
                         }
                         else
                         {
                             emailErrorMsgRef.current.style.display = "block";
+                            setEmailIsValid(false);
                         }
                     }} />
                     <div className="form-error-msg" ref={emailErrorMsgRef}>This email is invalid.</div>
@@ -106,14 +100,15 @@ export default function ContactForm() {
                     <label htmlFor="comments">Comments</label>
                     <textarea rows="5" id="comments" name="message" value={clientComments}
                     placeholder="Enter your comments here..." onChange={e => {
-                        setClientComments(e.target.value);
-                        if (commentsAreValid)
+                        if (e.target.value.length !== 0)
                         {
                             commentsErrorMsgRef.current.style.display = "none";
+                            setCommentsAreValid(true);
                         }
                         else
                         {
                             commentsErrorMsgRef.current.style.display = "block";
+                            setCommentsAreValid(false);
                         }
                     }}></textarea>
                     <div className="form-error-msg" ref={commentsErrorMsgRef}>
