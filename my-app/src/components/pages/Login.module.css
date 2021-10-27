@@ -17,3 +17,8 @@
     height: 100%;
     padding: 2.5rem;
 }
+
+.loginContent h2
+{
+    margin-bottom: 2rem;
+}

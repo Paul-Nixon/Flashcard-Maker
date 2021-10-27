@@ -58,7 +58,7 @@ export default function ContactForm() {
             <form className={styles.contactForm} onSubmit={formHandler} ref={formRef}>
                 <div className="inputWrapper">
                     <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your name" value={clientName} autoFocus="true"
+                    <input type="text" id="name" name="name" placeholder="Your name" autoFocus="true"
                     onChange={e => {                       
                         if (e.target.value.length !== 0)
                         {
@@ -78,9 +78,8 @@ export default function ContactForm() {
 
                 <div className="inputWrapper">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your email" value={clientEmail}
+                    <input type="email" id="email" name="email" placeholder="Your email"
                     onChange={e => {
-                        setClientEmail(e.target.value);
                         if (e.target.value.length !== 0 && (
                             e.target.value.includes("@") && e.target.value.includes(".com")))
                         {
@@ -98,8 +97,8 @@ export default function ContactForm() {
 
                 <div className="inputWrapper">
                     <label htmlFor="comments">Comments</label>
-                    <textarea rows="5" id="comments" name="message" value={clientComments}
-                    placeholder="Enter your comments here..." onChange={e => {
+                    <textarea rows="5" id="comments" name="message"placeholder="Enter your comments here..."
+                    onChange={e => {
                         if (e.target.value.length !== 0)
                         {
                             commentsErrorMsgRef.current.style.display = "none";
