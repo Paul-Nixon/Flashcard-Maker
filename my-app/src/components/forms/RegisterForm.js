@@ -87,7 +87,7 @@ export default function RegisterForm() {
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" placeholder="Enter a password"
                     ref={passwordInputRef} onChange={e => {
-                        if (e.target.value.length >= 5)
+                        if (e.target.value.length >= 6)
                         {
                             passwordErrorMsgRef.current.style.display = "none";
                             setPasswordIsValid(true);
@@ -99,7 +99,7 @@ export default function RegisterForm() {
                         }
                     }} />
                     <div className="form-error-msg" ref={passwordErrorMsgRef}>
-                        The password must be at least 5 characters.
+                        The password must be at least 6 characters.
                     </div>
                 </div>
 

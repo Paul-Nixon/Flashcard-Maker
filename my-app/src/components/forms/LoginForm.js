@@ -66,7 +66,7 @@ export default function LoginForm() {
                     Continue with Google
                 </button>
 
-                {authCtx.currentUser && renderUserDashboard()}
+                {authCtx.currentUser && renderUserDashboard?.()}
             </div>
         </Card>
     )
