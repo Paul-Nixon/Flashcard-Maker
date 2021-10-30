@@ -1,17 +1,15 @@
 import styles from './UserDashboard.module.css';
 
-import Topbar from '../layout/Topbar';
 import Sidebar from '../layout/Sidebar';
 
 
 export default function UserDashboard() {
     return (
         <div className={styles.userDashboard}>
-            <Topbar />
+            <Sidebar />
 
             <div className={styles.dashboardMainContent}>
-                <Sidebar />
-                
+                Data will be displayed here
             </div>
         </div>
     )

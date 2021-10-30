@@ -1,4 +1,70 @@
 .sidebar
 {
-    
+    flex: 1;
+    height: 100%;
+    background-color: #333;
+    position: sticky;
+}
+
+.sidebarWrapper
+{
+    padding: 1.25rem;
+}
+
+.userInfo
+{
+    display: flex;
+    align-items: center;
+}
+
+.pfp
+{
+    border-radius: 50%;
+    width: 3.125rem;
+    height: 3.125rem;
+}
+
+.username
+{
+    font-size: 1.25rem;
+    color: white;
+}
+
+.sidebarHr
+{
+    margin: 1.25rem 0;
+}
+
+.sidebarList
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebarListItem
+{
+    display: flex;
+    align-items: center;
+}
+
+.sidebarListItem + .sidebarListItem
+{
+    margin-top: 1.25rem;
+}
+
+.sidebarListIcon
+{
+    margin-right: 1rem;
+}
+
+.sidebarListText
+{
+    font-size: 1.125rem;
+    color: white;
+}
+
+.sidebarListText.active
+{
+
 }
