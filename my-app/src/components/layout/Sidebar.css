@@ -20,14 +20,16 @@
 .pfp
 {
     border-radius: 50%;
-    width: 3.125rem;
-    height: 3.125rem;
+    font-size: 2.5rem;
+    color: white;
+    margin-right: 1.25rem;
 }
 
 .username
 {
     font-size: 1.25rem;
     color: white;
+    margin: 0;
 }
 
 .sidebarHr
@@ -46,6 +48,30 @@
 {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+    width: fit-content;
+    padding: 0.5rem;
+}
+
+.sidebarListItem:hover
+{
+    background-color: white;
+}
+
+.sidebarListItem:hover .sidebarListIcon, .sidebarListItem:hover .sidebarListText
+{
+    color: black;
+}
+
+.sidebarListItem.active
+{
+    background-color: white;
+}
+
+.sidebarListItem.active .sidebarListIcon, .sidebarListItem.active .sidebarListText
+{
+    color: black;
 }
 
 .sidebarListItem + .sidebarListItem
@@ -56,15 +82,11 @@
 .sidebarListIcon
 {
     margin-right: 1rem;
+    color: white;
 }
 
 .sidebarListText
 {
     font-size: 1.125rem;
     color: white;
-}
-
-.sidebarListText.active
-{
-
 }
