@@ -1,10 +1,10 @@
-import styles from './Homepage.module.css';
+import styles from './WebsiteHomepage.module.css';
 
 import { Link } from 'react-router-dom';
 
 import HomepageHeader from "../layout/HomepageHeader";
 
-export default function Homepage() {
+export default function WebsiteHomepage() {
     return (
         <div className={styles.homepage}>
             <HomepageHeader />

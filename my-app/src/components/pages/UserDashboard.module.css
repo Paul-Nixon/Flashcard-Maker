@@ -8,4 +8,6 @@
 .dashboardMainContent
 {
     flex: 2;
+    padding: 1.875rem;
+    background-color: #ccc;
 }

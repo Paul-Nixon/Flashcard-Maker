@@ -17,9 +17,11 @@ export default function Sidebar(props) {
     useEffectOnce(() => homeLinkRef.current.classList.add("active"));
 
 
-    function changeActiveLink(unactiveRef)
+    function changeActiveLink(unactiveLink)
     {
-        // TODO: Remove the active class from the current link and add it to the clicked one.
+        activeLink.current.classList.remove("active");
+        unactiveLink.current.classList.add("active");
+        setActiveLink(unactiveLink);
     }
 
 
