@@ -1,54 +1,105 @@
 .userHomepage
 {
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .snapshotData
 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 
+}
+
+.snapshotDetails
+{
+    padding: 2rem;
 }
 
 .snapshotTitle
 {
-
+    color: darkgrey;
+    font-size: 0.9375rem;
+    margin: 0 0 0.5rem;
+    text-align: left;
 }
 
 .snapshotNum
 {
-
+    font-size: 1.5rem;
 }
 
 .quizzesAndTestsInfo
 {
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .dataSectionTitle
 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    text-align: left;
+}
 
+.dataCardsWrapper
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dataSectionSubtitle
 {
-
+    font-size: 1.25rem;
+    margin: 1rem 0 1rem 1rem;
+    text-align: left;
 }
 
-.latestQuizzes
-{
-
-}
-
-.quizCategory
-{
-
-}
-
-.quizDate
-{
-
-}
-
-.quizGrade
+.latestQuizzes, .latestTests
 {
     
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+}
+
+.infoWrapper
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoWrapper + .infoWrapper
+{
+    margin-top: 1rem;
+}
+
+.quizCategory, .testCategory
+{
+    font-size: 1.25rem;
+    margin-right: 2.5rem;
+    text-align: left;
+}
+
+.quizDate, .testDate
+{
+    font-size: 0.9375rem;
+    color: darkgrey;
+    margin-right: 2.5rem;
+    font-weight: 525;
+}
+
+.quizGrade, .testGrade
+{
+    font-size: 1.125rem;
 }

@@ -1,7 +1,7 @@
 import styles from './UserDashboard.module.css';
 
 import Sidebar from '../layout/Sidebar';
-
+import UserHomepage from './UserHomepage';
 
 export default function UserDashboard() {
     return (
@@ -9,7 +9,7 @@ export default function UserDashboard() {
             <Sidebar />
 
             <div className={styles.dashboardMainContent}>
-                Data will be displayed here
+                <UserHomepage />
             </div>
         </div>
     )
