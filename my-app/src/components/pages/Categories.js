@@ -1,11 +1,12 @@
 import styles from './Categories.module.css';
 
-import FlashcardList from "../flashcards/FlashcardList";
+import Accordion from '../ui/Accordion';
 
 
-export default function Categories() {
+
+export default function Categories(props) {
     return (
-        <div>
+        <div className="categoriesPage">
             
         </div>
     )

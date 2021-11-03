@@ -2,6 +2,7 @@ import styles from './About.module.css';
 
 import HomepageHeader from "../layout/HomepageHeader";
 
+
 export default function About() {
     return (
         <div className={styles.aboutPage}>
