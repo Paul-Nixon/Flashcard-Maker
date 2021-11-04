@@ -1,0 +1,49 @@
+.category
+{
+    width: 100%;
+    background-color: khaki;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoryTitle
+{
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+}
+
+.categoryOptions
+{
+    display: flex;
+    align-items: center;
+}
+
+.categoryOptionBtn
+{
+    font-size: 1.125rem;
+    color: ;
+    border-radius: ;
+    background-color: transparent;
+}
+
+.categoryOptionBtn:hover
+{
+    color: ;
+    background-color: ;
+}
+
+.categoryTrashBtn
+{
+    border-radius: 50%;
+    padding: ;
+    cursor: pointer;
+}
+
+.categoryTrashBtn:hover
+{
+    color: white;
+    background-color: red;
+}
