@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid black;
 }
 
 .categoryTitle
@@ -13,6 +14,7 @@
     font-size: 1.5rem;
     color: white;
     margin: 0;
+    text-align: left;
 }
 
 .categoryOptions
@@ -24,22 +26,23 @@
 .categoryOptionBtn
 {
     font-size: 1.125rem;
-    color: ;
-    border-radius: ;
+    color: white;
     background-color: transparent;
+    border: 1px solid green;
+    margin-right: 1rem;
 }
 
 .categoryOptionBtn:hover
 {
-    color: ;
-    background-color: ;
+    background-color: green;
 }
 
 .categoryTrashBtn
 {
     border-radius: 50%;
-    padding: ;
     cursor: pointer;
+    font-size: 40px;
+    padding: 0.5rem;
 }
 
 .categoryTrashBtn:hover

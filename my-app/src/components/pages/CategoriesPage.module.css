@@ -1,0 +1,23 @@
+.categoriesPage
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.newCategoryBtn
+{
+    background-color: khaki;
+    font-size: 1.5rem;
+    margin-bottom: 1.875rem;
+    border: none;
+}
+
+.newCategoryBtn:hover
+{
+    background-color: rgb(214, 205, 126);
+}
