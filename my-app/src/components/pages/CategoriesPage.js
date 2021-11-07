@@ -5,11 +5,10 @@ import useEffectOnce from "../custom_hooks/useEffectOnce";
 import Category from '../categories/Category';
 
 
-
-export default function CategoriesPage() {
+export default function CategoriesPage(props) {
     return (
         <div className={styles.categoriesPage}>
-            <button className={styles.newCategoryBtn}>Add New Category</button>
+            <button className={styles.newCategoryBtn} onClick={props.renderCategoriesPage}>Add New Category</button>
             
             <>
                 <Category />

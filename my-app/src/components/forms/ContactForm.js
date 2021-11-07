@@ -97,7 +97,7 @@ export default function ContactForm() {
 
                 <div className="inputWrapper">
                     <label htmlFor="comments">Comments</label>
-                    <textarea rows="5" id="comments" name="message"placeholder="Enter your comments here..."
+                    <textarea rows="5" id="comments" name="message" placeholder="Enter your comments here..."
                     onChange={e => {
                         if (e.target.value.length !== 0)
                         {

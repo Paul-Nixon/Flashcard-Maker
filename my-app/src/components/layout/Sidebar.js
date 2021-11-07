@@ -38,12 +38,14 @@ export default function Sidebar(props) {
                 <ul className="sidebarList">
                     <li className="sidebarListItem" ref={homeLinkRef} onClick={() => {
                         changeActiveLink(homeLinkRef);
+                        props.renderUserHomepage;
                     }}>
                         <FontAwesomeIcon icon={faHome} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Home</span>
                     </li>
                     <li className="sidebarListItem" ref={categoriesLinkRef} onClick={() => {
                         changeActiveLink(categoriesLinkRef);
+                        props.renderCategoriesPage;
                     }}>
                         <FontAwesomeIcon icon={faList} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Categories</span>
