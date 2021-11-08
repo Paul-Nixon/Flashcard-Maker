@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
-import { firestore } from "../firebase";
+import React from "react";
+import { db } from "../firebase";
+import { addDoc, setDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc,
+         query, where} from "firebase/firestore";
+
 
 const CategoriesContext = React.createContext({
 
@@ -8,14 +11,21 @@ const CategoriesContext = React.createContext({
 
 export function CategoriesProvider({ children })
 {
-    function addCategory()
+    function addCategory(categoryName, categoryOwner)
     {
+        const docData = {
+            id: 1,
+            name: categoryName,
+            owner: categoryOwner,
+            flashcards: []
+        };
 
+        await addDoc(collection(db, "categories"), docData);
     }
 
-    function addFlashcard()
+    function addFlashcard(newFlashcard)
     {
-
+        
     }
 
     function removeCategory()
