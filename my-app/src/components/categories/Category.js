@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function Category({ category }) {
+export default function Category({ name }) {
     return (
         <div className={styles.category}>
-            <h2 className={styles.categoryTitle}>Title</h2>
+            <h2 className={styles.categoryTitle}>{name}</h2>
 
             <div className={styles.categoryOptions}>
                 <button className={styles.categoryOptionBtn}>Add New Flashcard</button>
