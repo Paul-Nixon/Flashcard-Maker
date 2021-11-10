@@ -13,18 +13,6 @@
     width: 100%;
 }
 
-.loginErrorMsg
-{
-    display: none;
-    border: none;
-    background-color: black;
-    color: red;
-    border-radius: 6px;
-    font-size: 1.125rem;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-}
-
 .loginBtn
 {
     width: 100%;

@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import { auth } from "../firebase";
 
 const AuthContext = React.createContext({
-  currentUser: {},
+  currentUser,
   addUser: (email, password) => {},
   loginUser: (email, password) => {},
   logoutUser: () => {},

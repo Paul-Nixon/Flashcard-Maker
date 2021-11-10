@@ -43,7 +43,7 @@ export default function LoginForm() {
         <Card>
             <div className={styles.loginOptions}>
                 <form className={styles.loginForm} onSubmit={formHandler}>
-                    <div className={styles.loginErrorMsg} ref={loginErrorMsgRef}>Invalid email or password.</div>
+                    <div className="formErrorMsg" ref={loginErrorMsgRef}>Invalid email or password.</div>
                     <div className="inputWrapper">
                         <label htmlFor="email">Email</label>
                         <input type="text" id="email" placeholder="Your email" autoFocus={true}
