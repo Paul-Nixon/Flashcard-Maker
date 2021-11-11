@@ -1,3 +1,11 @@
+.categoryFormWrapper
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .newCategoryForm
 {
     padding: 2rem;

@@ -1,15 +1,6 @@
-.loginOptions
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1.5rem 1.5rem;
-}
-
 .loginForm
 {
-    padding: 0.5rem;
+    padding: 3rem;
     width: 100%;
 }
 
@@ -27,57 +18,4 @@
 .loginBtn:hover
 {
     background-color: midnightblue;
-}
-
-.separator
-{
-    width: 70%;
-    color: darkgrey;
-    font-size: 1.25rem;
-    font-weight: 330;
-    margin: 1.5rem auto;
-    text-align: center;
-    overflow: hidden;
-}
-
-.separator::before, .separator::after
-{
-    content: "";
-    width: 50%;
-    display: inline-block;
-    margin: 0 .5em 0 -55%;
-    border-bottom: 1px solid;
-    vertical-align: middle;
-}
-
-.separator::after
-{
-    margin: 0 -55% 0 .5em;
-}
-
-.authProviderBtn
-{
-    width: 100%;
-    background-color: transparent;
-    color: black;
-    border: 2px solid black;
-    font-size: 1.125rem;
-}
-
-.authProviderBtn:hover
-{
-    background-color: black;
-    color: white;
-}
-
-.authProviderBtn:hover .authProviderBtnIcon
-{
-    color: white;
-}
-
-.authProviderBtnIcon
-{
-    font-size: 1.125rem;
-    color: black;
-    margin-right: 1.25rem;
 }

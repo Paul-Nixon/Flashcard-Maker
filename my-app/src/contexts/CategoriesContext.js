@@ -24,19 +24,19 @@ export function CategoriesProvider({ children })
             flashcards: []
         };
 
-        await addDoc(collection(db, "categories"), docData);
+        addDoc(collection(db, "categories"), docData);
     }
 
     function addFlashcard(newFlashcard, categoryOwner, categoryName)
     {
         const querySnapshot = fetchCategory(categoryOwner, categoryName);
 
-        await updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
+        updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
     }
 
     function removeCategory(categoryOwner, categoryName)
     {
-        await deleteDoc(doc(db, "categories"), where("owner", "==", categoryOwner), 
+        deleteDoc(doc(db, "categories"), where("owner", "==", categoryOwner), 
         where("name", "==", categoryName));
     }
 
@@ -44,7 +44,7 @@ export function CategoriesProvider({ children })
     {
         const q = query(collection(db, "categories"), where("owner", "==", categoryOwner), 
             where("name", "==", categoryName)),
-        querySnapshot = await getDoc(q);
+        querySnapshot = getDoc(q);
 
         return querySnapshot;
     }
@@ -59,7 +59,7 @@ export function CategoriesProvider({ children })
     function fetchAllCategories(categoryOwner)
     {
         const q = query(collection(db, "categories"), where("owner", "==", categoryOwner)),
-        querySnapshot = await getDocs(q);
+        querySnapshot = getDocs(q);
 
         return querySnapshot.data();
     }

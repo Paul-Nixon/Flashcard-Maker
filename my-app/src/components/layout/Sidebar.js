@@ -2,7 +2,8 @@ import './Sidebar.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faHome, faList, faPencilAlt, faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import useEffectOnce from '../custom_hooks/useEffectOnce';
 
 export default function Sidebar(props) {
@@ -12,7 +13,8 @@ export default function Sidebar(props) {
     quizzesAndTestsLinkRef = useRef(),
     SettingsLinkRef = useRef(),
     LogoutLinkRef = useRef(),
-    [activeLink, setActiveLink] = useState(homeLinkRef);
+    [activeLink, setActiveLink] = useState(homeLinkRef),
+    { currentUser }= useContext(AuthContext);
 
     useEffectOnce(() => homeLinkRef.current.classList.add("active"));
 
@@ -38,14 +40,14 @@ export default function Sidebar(props) {
                 <ul className="sidebarList">
                     <li className="sidebarListItem" ref={homeLinkRef} onClick={() => {
                         changeActiveLink(homeLinkRef);
-                        props.renderUserHomepage;
+                        props.renderUserHomepage();
                     }}>
                         <FontAwesomeIcon icon={faHome} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Home</span>
                     </li>
                     <li className="sidebarListItem" ref={categoriesLinkRef} onClick={() => {
                         changeActiveLink(categoriesLinkRef);
-                        props.renderCategoriesPage;
+                        props.renderCategoriesPage();
                     }}>
                         <FontAwesomeIcon icon={faList} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Categories</span>
@@ -63,7 +65,7 @@ export default function Sidebar(props) {
                         <span className="sidebarListText">Settings</span>
                     </li>
                     <li className="sidebarListItem" ref={LogoutLinkRef} onClick={() => {
-                        changeActiveLink(LogoutLinkRef);
+                        props.logoutUser();
                     }}>
                         <FontAwesomeIcon icon={faSignOutAlt} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Log Out</span>

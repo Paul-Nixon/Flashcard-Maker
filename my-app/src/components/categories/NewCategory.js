@@ -16,9 +16,9 @@ export default function NewCategory() {
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
     [modalIsRendered, setModalIsRendered] = useState(false),
-    [backdropIsRendered, setBackdropIsRendered] = useState(false);
+    [backdropIsRendered, setBackdropIsRendered] = useState(false),
+    [modal, setModal] = useState(<Modal />);
     
-    let modal;
    
     function removeModalHandler()
     {
@@ -27,7 +27,7 @@ export default function NewCategory() {
     }
 
 
-    function formHandler(event)
+    async function formHandler(event)
     {
         event.preventDefault();
 
@@ -36,20 +36,29 @@ export default function NewCategory() {
             try
             {
                 categoriesCtx.addCategory(nameRef.current.value, currentUser.email);
-                modal = <Modal>New category created!</Modal>;
+                setModal(<Modal>
+                    <span class="close" onClick={removeModalHandler}>&times;</span>;
+                    New category created!
+                </Modal>);
                 setModalIsRendered(true);
                 setBackdropIsRendered(true);
             }
             catch (error)
             {
-                modal = <Modal>There's a back-end error.</Modal>;
+                setModal(<Modal>
+                    <span class="close" onClick={removeModalHandler}>&times;</span>
+                    There's a back-end error.
+                </Modal>);
                 setModalIsRendered(true);
                 setBackdropIsRendered(true);
             }
         }
         else
         {
-            modal = <Modal>The Name field cannot be empty.</Modal>;
+            setModal(<Modal>
+                <span class="close" onClick={removeModalHandler}>&times;</span>
+                The name field cannot be empty.
+            </Modal>);
             setModalIsRendered(true);
             setBackdropIsRendered(true);
         }
@@ -57,21 +66,23 @@ export default function NewCategory() {
     
     
     return (
-        <Card>
-            <form className={styles.newCategoryForm} onSubmit={formHandler}>
-                <div className="formErrorMsg" ref={formErrorMsgRef}>Invalid email or password.</div>
-                <div className="inputWrapper">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Category name" ref={nameRef}  />
-                </div>
+        <div className={styles.categoryFormWrapper}>
+            <Card>
+                <form className={styles.newCategoryForm} onSubmit={formHandler}>
+                    <div className="formErrorMsg" ref={formErrorMsgRef}>Invalid email or password.</div>
+                    <div className="inputWrapper">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Category name" ref={nameRef}  />
+                    </div>
 
-                <div className="contactFormActions">
-                    <button>Submit</button>
-                </div>
-            </form>
+                    <div className="contactFormActions">
+                        <button>Submit</button>
+                    </div>
+                </form>
 
-            {modalIsRendered && modal}
-            {backdropIsRendered && <Backdrop onCancel={removeModalHandler} />}
-        </Card>
+                {modalIsRendered && modal}
+                {backdropIsRendered && <Backdrop onCancel={removeModalHandler} />}
+            </Card>
+        </div>
     )
 }
