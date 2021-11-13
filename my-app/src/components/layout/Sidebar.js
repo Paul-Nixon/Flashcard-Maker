@@ -3,6 +3,8 @@ import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faHome, faList, faPencilAlt, faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef, useContext } from 'react';
+import { useHistory } from "react-router-dom";
+
 import AuthContext from '../../contexts/AuthContext';
 import useEffectOnce from '../custom_hooks/useEffectOnce';
 
@@ -14,7 +16,8 @@ export default function Sidebar(props) {
     SettingsLinkRef = useRef(),
     LogoutLinkRef = useRef(),
     [activeLink, setActiveLink] = useState(homeLinkRef),
-    { currentUser }= useContext(AuthContext);
+    { logoutUser, currentUser } = useContext(AuthContext),
+    history = useHistory();
 
     useEffectOnce(() => homeLinkRef.current.classList.add("active"));
 
@@ -26,13 +29,26 @@ export default function Sidebar(props) {
         setActiveLink(unactiveLink);
     }
 
+    function logoutHandler()
+    {
+        try
+        {
+            logoutUser();
+            history.push("/login");
+        }
+        catch (error)
+        {
+            history.push("/register");
+        }
+    }
 
+    
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <div className="userInfo">
                     <FontAwesomeIcon icon={faUserCircle} fixedWidth className="pfp" />
-                    <h2 className="username">Username</h2>
+                    <h2 className="username">{currentUser.email}</h2>
                 </div>
 
                 <hr className="sidebarHr" />
@@ -64,9 +80,7 @@ export default function Sidebar(props) {
                         <FontAwesomeIcon icon={faCog} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Settings</span>
                     </li>
-                    <li className="sidebarListItem" ref={LogoutLinkRef} onClick={() => {
-                        props.logoutUser();
-                    }}>
+                    <li className="sidebarListItem" ref={LogoutLinkRef} onClick={logoutHandler}>
                         <FontAwesomeIcon icon={faSignOutAlt} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Log Out</span>
                     </li>

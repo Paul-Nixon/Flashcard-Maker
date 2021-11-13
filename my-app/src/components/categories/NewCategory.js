@@ -37,11 +37,12 @@ export default function NewCategory() {
             {
                 categoriesCtx.addCategory(nameRef.current.value, currentUser.email);
                 setModal(<Modal>
-                    <span class="close" onClick={removeModalHandler}>&times;</span>;
+                    <span class="close" onClick={removeModalHandler}>&times;</span>
                     New category created!
                 </Modal>);
                 setModalIsRendered(true);
                 setBackdropIsRendered(true);
+                event.target.reset();
             }
             catch (error)
             {

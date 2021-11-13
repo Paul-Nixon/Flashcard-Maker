@@ -1,20 +1,19 @@
 import styles from './UserDashboard.module.css';
 
-import { useState, useContext } from 'react';
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
 
 import Sidebar from '../layout/Sidebar';
 import UserHomepage from './UserHomepage';
 import CategoriesPage from './CategoriesPage';
 import NewCategory from '../categories/NewCategory';
-import AuthContext from '../../contexts/AuthContext';
+import NewFlashcard from '../flashcards/NewFlashcard';
+import { AuthProvider } from '../../contexts/AuthContext';
+import { CategoriesProvider } from '../../contexts/CategoriesContext';
 
 
 export default function UserDashboard() {
     
-    const [page, setPage] = useState("homepage"),
-    { logoutUser } = useContext(AuthContext),
-    history = useHistory();
+    const [page, setPage] = useState("homepage");
     
     function renderUserHomepage()
     {
@@ -31,28 +30,26 @@ export default function UserDashboard() {
         setPage("newCategory");
     }
 
-    function logoutHandler()
+    function renderNewFlashcardPage()
     {
-        try
-        {
-            logoutUser();
-            history.push("/login");
-        }
-        catch (error)
-        {
-            history.push("/register");
-        }
+        setPage("newFlashcard");
     }
+
 
     return (
         <div className={styles.userDashboard}>
-            <Sidebar renderUserHomepage={renderUserHomepage} renderCategoriesPage={renderCategoriesPage}
-                logoutUser={logoutHandler} />
+            <AuthProvider>
+                <Sidebar renderUserHomepage={renderUserHomepage} renderCategoriesPage={renderCategoriesPage} />
+            </AuthProvider>
 
             <div className={styles.dashboardMainContent}>
                 {page === "homepage" && <UserHomepage />}
-                {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} />}
-                {page === "newCategory" && <NewCategory />}
+                {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
+                    renderNewFlashcardPage={renderNewFlashcardPage} />}
+                {page === "newCategory" && <AuthProvider>
+                    <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
+                {page === "newFlashcard" && <AuthProvider>
+                    <CategoriesProvider><NewFlashcard /></CategoriesProvider></AuthProvider>}
             </div>
         </div>
     )

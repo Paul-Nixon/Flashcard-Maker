@@ -2,11 +2,13 @@ import styles from './Category.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import AuthContext from "../../contexts/AuthContext";
+import CategoriesContext from "../../contexts/CategoriesContext";
 
 
 export default function Category({ name }) {
     return (
-        <div className={styles.category}>
+        <li className={styles.category}>
             <h2 className={styles.categoryTitle}>{name}</h2>
 
             <div className={styles.categoryOptions}>
@@ -14,6 +16,6 @@ export default function Category({ name }) {
                 <button className={styles.categoryOptionBtn}>View Flashcards</button>
                 <FontAwesomeIcon icon={faTrash} className={styles.categoryTrashBtn} />
             </div>
-        </div>
+        </li>
     )
 }

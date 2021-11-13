@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { db } from "../firebase";
 import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getDocs,
     query, where} from "firebase/firestore";
@@ -15,6 +15,9 @@ const CategoriesContext = React.createContext({
 
 export function CategoriesProvider({ children })
 {
+    
+
+
     function addCategory(categoryName, categoryOwner)
     {
         const docData = {
