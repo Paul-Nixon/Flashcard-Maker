@@ -44,8 +44,9 @@ export default function UserDashboard() {
 
             <div className={styles.dashboardMainContent}>
                 {page === "homepage" && <UserHomepage />}
-                {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
-                    renderNewFlashcardPage={renderNewFlashcardPage} />}
+                {page === "categories" && <AuthProvider><CategoriesProvider>
+                    <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
+                    renderNewFlashcardPage={renderNewFlashcardPage} /></CategoriesProvider></AuthProvider>}
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>

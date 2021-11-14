@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { db } from "../firebase";
 import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getDocs,
     query, where} from "firebase/firestore";
 
 
 const CategoriesContext = React.createContext({
+    userCategories: [],
     addCategory: (categoryName, categoryOwner) => {},
     addFlashcard: (newFlashcard, categoryOwner, categoryName) => {},
     removeCategory: (categoryName, categoryOwner) => {},
@@ -15,13 +16,11 @@ const CategoriesContext = React.createContext({
 
 export function CategoriesProvider({ children })
 {
-    
-
 
     function addCategory(categoryName, categoryOwner)
     {
         const docData = {
-            id: 1,
+            id: userCategories.length + 1,
             name: categoryName,
             owner: categoryOwner,
             flashcards: []
@@ -64,7 +63,13 @@ export function CategoriesProvider({ children })
         const q = query(collection(db, "categories"), where("owner", "==", categoryOwner)),
         querySnapshot = getDocs(q);
 
-        return querySnapshot.data();
+        const categories = [];
+        for (const doc in querySnapshot.docs)
+        {
+            categories.push(doc);
+        }
+
+        return categories;
     }
 
     const value = {

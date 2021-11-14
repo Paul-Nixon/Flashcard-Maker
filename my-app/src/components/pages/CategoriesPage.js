@@ -1,24 +1,24 @@
+import { useContext } from 'react';
+
 import styles from './CategoriesPage.module.css';
 
 import CategoryList from '../categories/CategoryList';
-import useEffectOnce from "../custom_hooks/useEffectOnce";
-import Category from '../categories/Category';
+import AuthContext from '../../contexts/AuthContext';
+import CategoriesContext from '../../contexts/CategoriesContext';
 
 
 export default function CategoriesPage(props) {
     
+    const { currentUser } = useContext(AuthContext),
+    categoriesCtx = useContext(CategoriesContext),
+    categories = categoriesCtx.fetchAllCategories(currentUser.email);
     
-    
+
     return (
         <div className={styles.categoriesPage}>
             <button className={styles.newCategoryBtn} onClick={props.renderNewCategoryPage}>Add New Category</button>
             
-            <>
-                <Category />
-                <Category />
-                <Category />
-                <Category />
-            </>
+            <CategoryList categories={categories} />
         </div>
     )
 }
