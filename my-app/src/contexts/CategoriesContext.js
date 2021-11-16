@@ -5,7 +5,6 @@ import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getD
 
 
 const CategoriesContext = React.createContext({
-    userCategories: [],
     addCategory: (categoryName, categoryOwner) => {},
     addFlashcard: (newFlashcard, categoryOwner, categoryName) => {},
     removeCategory: (categoryName, categoryOwner) => {},
@@ -20,7 +19,6 @@ export function CategoriesProvider({ children })
     function addCategory(categoryName, categoryOwner)
     {
         const docData = {
-            id: userCategories.length + 1,
             name: categoryName,
             owner: categoryOwner,
             flashcards: []
