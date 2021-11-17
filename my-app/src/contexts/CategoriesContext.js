@@ -56,16 +56,13 @@ export function CategoriesProvider({ children })
         return querySnapshot.data().flashcards;
     }
 
-    function fetchAllCategories(categoryOwner)
+    async function fetchAllCategories(categoryOwner)
     {
         const q = query(collection(db, "categories"), where("owner", "==", categoryOwner)),
-        querySnapshot = getDocs(q);
+        querySnapshot = await getDocs(q);
 
         const categories = [];
-        for (const doc in querySnapshot.docs)
-        {
-            categories.push(doc);
-        }
+        querySnapshot.docs.forEach(doc => {categories.push(doc.data())});
 
         return categories;
     }

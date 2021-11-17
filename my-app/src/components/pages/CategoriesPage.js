@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import styles from './CategoriesPage.module.css';
 
@@ -11,8 +11,7 @@ export default function CategoriesPage(props) {
     
     const { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
-    [categories, setCategories] = useState(categoriesCtx.fetchAllCategories(currentUser.email));
-    
+    categories = categoriesCtx.fetchAllCategories(currentUser.email);
 
     return (
         <div className={styles.categoriesPage}>
