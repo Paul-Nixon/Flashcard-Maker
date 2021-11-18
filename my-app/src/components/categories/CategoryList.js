@@ -6,6 +6,8 @@ import { CategoriesProvider } from '../../contexts/CategoriesContext';
 
 
 export default function CategoryList({ categories }) {
+    
+
     return (
         <ul className={styles.categoriesList}>
             {categories.map(category => {
