@@ -5,7 +5,6 @@ import styles from './CategoriesPage.module.css';
 import CategoryList from '../categories/CategoryList';
 import AuthContext from '../../contexts/AuthContext';
 import CategoriesContext from '../../contexts/CategoriesContext';
-import UseEffectOnce from "../custom_hooks/useEffectOnce";
 
 
 export default function CategoriesPage(props) {

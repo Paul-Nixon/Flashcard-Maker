@@ -12,7 +12,6 @@ import Backdrop from "../ui/Backdrop";
 export default function NewCategory() {
     
     const nameRef = useRef(),
-    formErrorMsgRef = useRef(),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
     [modalIsRendered, setModalIsRendered] = useState(false),
@@ -70,7 +69,6 @@ export default function NewCategory() {
         <div className={styles.categoryFormWrapper}>
             <Card>
                 <form className={styles.newCategoryForm} onSubmit={formHandler}>
-                    <div className="formErrorMsg" ref={formErrorMsgRef}>Invalid email or password.</div>
                     <div className="inputWrapper">
                         <label htmlFor="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Category name" ref={nameRef}  />
