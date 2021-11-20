@@ -1,6 +1,6 @@
 import styles from './NewFlashcard.module.css';
 
-import { useRef, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import AuthContext from "../../contexts/AuthContext";
 import CategoriesContext from "../../contexts/CategoriesContext";
@@ -12,16 +12,31 @@ import useFormValidation from '../custom_hooks/useFormValidation';
 
 export default function NewFlashcard() {
     
-    const questionRef = useRef(),
-    answerRef = useRef(),
-    firstOptionRef = useRef(),
-    secondOptionRef = useRef(),
-    thirdOptionRef = useRef(),
-    { currentUser } = useContext(AuthContext),
+    const { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
     [modalIsRendered, setModalIsRendered] = useState(false),
     [backdropIsRendered, setBackdropIsRendered] = useState(false),
-    [modal, setModal] = useState(<Modal />);
+    [modal, setModal] = useState(<Modal />),
+    [question, setQuestion, questionIsValid] = useFormValidation(
+        flashcardQuestion => flashcardQuestion.length > 0,
+        ""
+    ),
+    [answer, setAnswer, answerIsValid] = useFormValidation(
+        flashcardAnswer => flashcardAnswer.length > 0,
+        ""
+    ),
+    [firstOption, setFirstOption, firstOptionIsValid] = useFormValidation(
+        flashcardFirstOption => flashcardFirstOption.length > 0,
+        ""
+    ),
+    [secondOption, setSecondOption, secondOptionIsValid] = useFormValidation(
+        flashcardSecondOption => flashcardSecondOption.length > 0,
+        ""
+    ),
+    [thirdOption, setThirdOption, thirdOptionIsValid] = useFormValidation(
+        flashcardThirdOption => flashcardThirdOption.length > 0,
+        ""
+    ),
 
 
     function removeModalHandler()
@@ -34,7 +49,39 @@ export default function NewFlashcard() {
     {
         event.preventDefault();
 
+        if (!validateInputs()) return;
 
+        try
+        {
+            const newFlashcard = 
+            {
+                question,
+                answer,
+                options:
+                    {
+                        firstOption,
+                        secondOption,
+                        thirdOption
+                    }
+            };
+
+            
+        }
+        catch (error)
+        {
+
+        }
+    }
+
+    function validateInputs()
+    {
+        if (!questionIsValid) return false;
+        if (!answerIsValid) return false;
+        if (!firstOptionIsValid) return false;
+        if (!secondOptionIsValid) return false;
+        if (!thirdOptionIsValid) return false;
+
+        return true;
     }
 
 
@@ -45,30 +92,31 @@ export default function NewFlashcard() {
                     <div className="inputWrapper">
                         <label htmlFor="question">Question</label>
                         <input type="text" id="question" name="question" placeholder="Flashcard question"
-                        ref={questionRef}  />
+                        onChange={e => setQuestion(e.target.value)} />
                     </div>
 
                     <div className="inputWrapper">
                         <label htmlFor="answer">Answer</label>
-                        <input type="text" id="answer" name="answer" placeholder="Flashcard answer" ref={answerRef}  />
+                        <input type="text" id="answer" name="answer" placeholder="Flashcard answer"
+                        onChange={e => setAnswer(e.target.value)} />
                     </div>
 
                     <div className="inputWrapper">
                         <label htmlFor="firstOption">Option #1</label>
                         <input type="text" id="firstOption" name="firstOption" placeholder="First option"
-                        ref={firstOptionRef}  />
+                        onChange={e => setFirstOption(e.target.value)} />
                     </div>
 
                     <div className="inputWrapper">
                         <label htmlFor="secondOption">Option #2</label>
                         <input type="text" id="secondOption" name="secondOption" placeholder="Second option"
-                        ref={secondOptionRef}  />
+                        onChange={e => setSecondOption(e.target.value)} />
                     </div>
 
                     <div className="inputWrapper">
                         <label htmlFor="thirdOption">Option #3</label>
                         <input type="text" id="thirdOption" name="thirdOption" placeholder="Third option"
-                        ref={thirdOptionRef}  />
+                        onChange={e => setThirdOption(e.target.value)} />
                     </div>
 
                     <div className="contactFormActions">

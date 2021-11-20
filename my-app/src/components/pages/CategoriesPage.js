@@ -18,7 +18,8 @@ export default function CategoriesPage(props) {
         <div className={styles.categoriesPage}>
             <button className={styles.newCategoryBtn} onClick={props.renderNewCategoryPage}>Add New Category</button>
             
-            <CategoryList categories={categoriesCtx.userCategories} />
+            <CategoryList categories={categoriesCtx.userCategories}
+            renderFlashcardsPage={props.renderFlashcardsPage} renderNewFlashcardPage={props.renderNewFlashcardPage} />
         </div>
     )
 }

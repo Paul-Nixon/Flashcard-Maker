@@ -9,6 +9,7 @@ import NewCategory from '../categories/NewCategory';
 import NewFlashcard from '../flashcards/NewFlashcard';
 import { AuthProvider } from '../../contexts/AuthContext';
 import { CategoriesProvider } from '../../contexts/CategoriesContext';
+import FlashcardsPage from './FlashcardsPage';
 
 
 export default function UserDashboard() {
@@ -35,6 +36,11 @@ export default function UserDashboard() {
         setPage("newFlashcard");
     }
 
+    function renderFlashcardsPage()
+    {
+        setPage("flashcards");
+    }
+
 
     return (
         <div className={styles.userDashboard}>
@@ -46,11 +52,13 @@ export default function UserDashboard() {
                 {page === "homepage" && <UserHomepage />}
                 {page === "categories" && <AuthProvider><CategoriesProvider>
                     <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
-                    renderNewFlashcardPage={renderNewFlashcardPage} /></CategoriesProvider></AuthProvider>}
+                    renderNewFlashcardPage={renderNewFlashcardPage}
+                    renderFlashcardsPage={renderFlashcardsPage} /></CategoriesProvider></AuthProvider>}
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>
                     <CategoriesProvider><NewFlashcard /></CategoriesProvider></AuthProvider>}
+                {page === "flashcards" && <CategoriesProvider><FlashcardsPage /></CategoriesProvider>}
             </div>
         </div>
     )

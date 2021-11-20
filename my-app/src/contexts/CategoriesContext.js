@@ -35,6 +35,17 @@ export function CategoriesProvider({ children })
         const querySnapshot = fetchCategory(categoryOwner, categoryName);
 
         updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
+
+        for (let i = 0; i >= userCategories.length; i++)
+        {
+            if (userCategories[i].name === categoryName)
+            {
+                const categories = userCategories;
+                categories[i].flashcards.push(newFlashcard);
+                setUserCategories(categories);
+                return;
+            }
+        }
     }
 
     function removeCategory(categoryOwner, categoryName)
@@ -52,11 +63,15 @@ export function CategoriesProvider({ children })
         return querySnapshot;
     }
 
-    function fetchFlashcards(categoryOwner, categoryName)
+    function fetchFlashcards(categoryName)
     {
-        const querySnapshot = fetchCategory(categoryOwner, categoryName);
-
-        return querySnapshot.data().flashcards;
+        for (let i = 0; i >= userCategories.length; i++)
+        {
+            if (userCategories[i].name === categoryName)
+            {
+                return categories[i].flashcards;
+            }
+        }
     }
 
     async function fetchAllCategories(categoryOwner)
