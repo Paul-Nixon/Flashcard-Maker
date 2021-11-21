@@ -6,14 +6,15 @@ import FlashcardList from "../flashcards/FlashcardList";
 import CategoriesContext from '../../contexts/CategoriesContext';
 
 
-export default function FlashcardsPage() {
+export default function FlashcardsPage({ categoryName }) {
     
-    const categoriesCtx = useContext(CategoriesContext);
+    const categoriesCtx = useContext(CategoriesContext),
+    flashcards = categoriesCtx.fetchFlashcards(categoryName);
 
     
     return (
         <div className={styles.flashcardPage}>
-            <FlashcardList />
+            <FlashcardList flashcards={flashcards} />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import './Flashcard.css';
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 
 export default function Flashcard({ flashcard }) {
@@ -8,17 +8,17 @@ export default function Flashcard({ flashcard }) {
     const [flip, setFlip] = useState(false);
     
     return (
-        <div className="flashcard" onClick={() => setFlip(!flip)}>
-            <div className="flashcardFront">
+        <div className={`flashcard ${flip ? "flip" : ""}`} onClick={() => setFlip(!flip)}>
+            <div className="front">
                 {flashcard.question}
-                <div className="flashcardOptions">
+                <div className="flashcard-options">
                     {flashcard.options.map(option => {
-                        return <div className="FlashcardOption">{option}</div>
+                        return <div className="flashcard-option">{option}</div>
                     })}
                 </div>
             </div>
 
-            <div className="flashcardFront">{flashcard.answer}</div>
+            <div className="back">{flashcard.answer}</div>
         </div>
     )
 }

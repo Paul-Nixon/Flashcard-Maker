@@ -69,7 +69,7 @@ export function CategoriesProvider({ children })
         {
             if (userCategories[i].name === categoryName)
             {
-                return categories[i].flashcards;
+                return userCategories[i].flashcards;
             }
         }
     }

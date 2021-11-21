@@ -14,7 +14,8 @@ import FlashcardsPage from './FlashcardsPage';
 
 export default function UserDashboard() {
     
-    const [page, setPage] = useState("homepage");
+    const [page, setPage] = useState("homepage"),
+    [categoryName, setCategoryName] = useState("");
     
     function renderUserHomepage()
     {
@@ -31,13 +32,15 @@ export default function UserDashboard() {
         setPage("newCategory");
     }
 
-    function renderNewFlashcardPage()
+    function renderNewFlashcardPage(categoryName)
     {
         setPage("newFlashcard");
+        setCategoryName(categoryName);
     }
 
-    function renderFlashcardsPage()
+    function renderFlashcardsPage(categoryName)
     {
+        setCategoryName(categoryName);
         setPage("flashcards");
     }
 
@@ -57,8 +60,8 @@ export default function UserDashboard() {
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>
-                    <CategoriesProvider><NewFlashcard /></CategoriesProvider></AuthProvider>}
-                {page === "flashcards" && <CategoriesProvider><FlashcardsPage /></CategoriesProvider>}
+                    <CategoriesProvider><NewFlashcard categoryName={categoryName} /></CategoriesProvider></AuthProvider>}
+                {page === "flashcards" && <CategoriesProvider><FlashcardsPage categoryName={categoryName} /></CategoriesProvider>}
             </div>
         </div>
     )

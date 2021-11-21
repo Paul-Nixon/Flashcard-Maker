@@ -10,7 +10,7 @@ import Card from "../ui/Card";
 import useFormValidation from '../custom_hooks/useFormValidation';
 
 
-export default function NewFlashcard() {
+export default function NewFlashcard({ categoryName }) {
     
     const { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
@@ -36,7 +36,7 @@ export default function NewFlashcard() {
     [thirdOption, setThirdOption, thirdOptionIsValid] = useFormValidation(
         flashcardThirdOption => flashcardThirdOption.length > 0,
         ""
-    ),
+    );
 
 
     function removeModalHandler()
@@ -57,29 +57,37 @@ export default function NewFlashcard() {
             {
                 question,
                 answer,
-                options:
-                    {
-                        firstOption,
-                        secondOption,
-                        thirdOption
-                    }
+                options: [firstOption, secondOption, thirdOption]
             };
 
-            
+            categoriesCtx.addFlashcard(newFlashcard, currentUser.email, categoryName);
+
+            setModal(<Modal>
+                <span class="close" onClick={removeModalHandler}>&times;</span>
+                New flashcard created!
+            </Modal>);
+            setModalIsRendered(true);
+            setBackdropIsRendered(true);
+            event.target.reset();
         }
         catch (error)
         {
-
+            setModal(<Modal>
+                <span class="close" onClick={removeModalHandler}>&times;</span>
+                There's a back-end error.
+            </Modal>);
+            setModalIsRendered(true);
+            setBackdropIsRendered(true);
         }
     }
 
     function validateInputs()
     {
         if (!questionIsValid) return false;
-        if (!answerIsValid) return false;
-        if (!firstOptionIsValid) return false;
-        if (!secondOptionIsValid) return false;
-        if (!thirdOptionIsValid) return false;
+        else if (!answerIsValid) return false;
+        else if (!firstOptionIsValid) return false;
+        else if (!secondOptionIsValid) return false;
+        else if (!thirdOptionIsValid) return false;
 
         return true;
     }
@@ -92,11 +100,11 @@ export default function NewFlashcard() {
                     <div className="inputWrapper">
                         <label htmlFor="question">Question</label>
                         <input type="text" id="question" name="question" placeholder="Flashcard question"
-                        onChange={e => setQuestion(e.target.value)} />
+                        onChange={e => setQuestion(e.target.value)} autoFocus={true} />
                     </div>
 
                     <div className="inputWrapper">
-                        <label htmlFor="answer">Answer</label>
+                        <label htmlFor="answer">Correct Answer</label>
                         <input type="text" id="answer" name="answer" placeholder="Flashcard answer"
                         onChange={e => setAnswer(e.target.value)} />
                     </div>
