@@ -30,11 +30,11 @@ export function CategoriesProvider({ children })
         addDoc(collection(db, "categories"), docData);
     }
 
-    function addFlashcard(newFlashcard, categoryOwner, categoryName)
+    async function addFlashcard(newFlashcard, categoryOwner, categoryName)
     {
         const querySnapshot = fetchCategory(categoryOwner, categoryName);
 
-        updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
+        await updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
 
         for (let i = 0; i >= userCategories.length; i++)
         {
