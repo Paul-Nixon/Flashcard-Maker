@@ -32,7 +32,8 @@ export function CategoriesProvider({ children })
 
     async function addFlashcard(newFlashcard, categoryOwner, categoryName)
     {
-        const querySnapshot = fetchCategory(categoryOwner, categoryName);
+        const querySnapshot = await db.collection("categories").where("owner", "==", categoryOwner)
+        .where("name", "==", categoryName).get();
 
         await updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
 
@@ -52,15 +53,6 @@ export function CategoriesProvider({ children })
     {
         deleteDoc(doc(db, "categories"), where("owner", "==", categoryOwner), 
         where("name", "==", categoryName));
-    }
-
-    function fetchCategory(categoryOwner, categoryName)
-    {
-        const q = query(collection(db, "categories"), where("owner", "==", categoryOwner), 
-            where("name", "==", categoryName)),
-        querySnapshot = getDoc(q);
-
-        return querySnapshot;
     }
 
     function fetchFlashcards(categoryName)
