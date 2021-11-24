@@ -9,13 +9,21 @@ import NewCategory from '../categories/NewCategory';
 import NewFlashcard from '../flashcards/NewFlashcard';
 import { AuthProvider } from '../../contexts/AuthContext';
 import { CategoriesProvider } from '../../contexts/CategoriesContext';
+import AuthContext from "../../contexts/AuthContext";
+import CategoriesContext from "../../contexts/AuthContext";
 import FlashcardsPage from './FlashcardsPage';
+import useEffectOnce from "../custom_hooks/useEffectOnce";
 
 
 export default function UserDashboard() {
     
     const [page, setPage] = useState("homepage"),
-    [categoryName, setCategoryName] = useState("");
+    [categoryName, setCategoryName] = useState(""),
+    { currentUser } = useContext(AuthContext),
+    categoriesCtx = useContext(CategoriesContext);
+
+    useEffectOnce(() => categoriesCtx.fetchAllCategories(currentUser.email));
+    
     
     function renderUserHomepage()
     {

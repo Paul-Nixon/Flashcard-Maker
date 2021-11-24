@@ -7,6 +7,9 @@ import Register from './components/pages/Register';
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
 import UserDashboard from './components/pages/UserDashboard';
+import { AuthProvider } from './contexts/AuthContext';
+import { CategoriesProvider } from './contexts/CategoriesContext';
+
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path="/user" component={UserDashboard} exact />
+        <Route path="/user" exact >
+          <AuthProvider><CategoriesProvider><UserDashboard></UserDashboard></CategoriesProvider></AuthProvider>
+        </Route>
       </Switch>
     </Layout>
   );

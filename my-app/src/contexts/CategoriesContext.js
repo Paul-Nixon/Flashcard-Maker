@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
 import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getDocs,
-    query, where} from "firebase/firestore";
+    query, where, serverTimestamp} from "firebase/firestore";
 
 
 const CategoriesContext = React.createContext({
@@ -16,18 +16,23 @@ const CategoriesContext = React.createContext({
 
 export function CategoriesProvider({ children })
 {
-    const [userCategories, setUserCategories] = useState([]);
+    const [userCategories, setUserCategories] = useState([]),
+    [categoryIDs, setCategoryIDs] = useState([]);
 
 
-    function addCategory(categoryName, categoryOwner)
+    async function addCategory(categoryName, categoryOwner)
     {
         const docData = {
             name: categoryName,
             owner: categoryOwner,
             flashcards: []
-        };
+        },
+        docRef = await addDoc(collection(db, "categories"), docData);
 
-        addDoc(collection(db, "categories"), docData);
+        if (categoryIDs.length === 0) setCategoryIDs([docRef.id]);
+    
+
+        setCategoryIDs([...categoryIDs, docRef.id]);
     }
 
     async function addFlashcard(newFlashcard, categoryOwner, categoryName)
