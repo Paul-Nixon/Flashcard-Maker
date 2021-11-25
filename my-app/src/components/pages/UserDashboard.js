@@ -1,6 +1,6 @@
 import styles from './UserDashboard.module.css';
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import Sidebar from '../layout/Sidebar';
 import UserHomepage from './UserHomepage';
@@ -10,7 +10,7 @@ import NewFlashcard from '../flashcards/NewFlashcard';
 import { AuthProvider } from '../../contexts/AuthContext';
 import { CategoriesProvider } from '../../contexts/CategoriesContext';
 import AuthContext from "../../contexts/AuthContext";
-import CategoriesContext from "../../contexts/AuthContext";
+import CategoriesContext from "../../contexts/CategoriesContext";
 import FlashcardsPage from './FlashcardsPage';
 import useEffectOnce from "../custom_hooks/useEffectOnce";
 
@@ -61,10 +61,9 @@ export default function UserDashboard() {
 
             <div className={styles.dashboardMainContent}>
                 {page === "homepage" && <UserHomepage />}
-                {page === "categories" && <AuthProvider><CategoriesProvider>
-                    <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
+                {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
                     renderNewFlashcardPage={renderNewFlashcardPage}
-                    renderFlashcardsPage={renderFlashcardsPage} /></CategoriesProvider></AuthProvider>}
+                    renderFlashcardsPage={renderFlashcardsPage} categories={categoriesCtx.userCategories} />}
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>

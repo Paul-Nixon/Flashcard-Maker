@@ -16,8 +16,7 @@ const CategoriesContext = React.createContext({
 
 export function CategoriesProvider({ children })
 {
-    const [userCategories, setUserCategories] = useState([]),
-    [categoryIDs, setCategoryIDs] = useState([]);
+    const [userCategories, setUserCategories] = useState([]);
 
 
     async function addCategory(categoryName, categoryOwner)
@@ -29,10 +28,7 @@ export function CategoriesProvider({ children })
         },
         docRef = await addDoc(collection(db, "categories"), docData);
 
-        if (categoryIDs.length === 0) setCategoryIDs([docRef.id]);
-    
-
-        setCategoryIDs([...categoryIDs, docRef.id]);
+        
     }
 
     async function addFlashcard(newFlashcard, categoryOwner, categoryName)
@@ -54,7 +50,7 @@ export function CategoriesProvider({ children })
         }
     }
 
-    function removeCategory(categoryOwner, categoryName)
+    async function removeCategory(categoryOwner, categoryName)
     {
         deleteDoc(doc(db, "categories"), where("owner", "==", categoryOwner), 
         where("name", "==", categoryName));
@@ -77,7 +73,7 @@ export function CategoriesProvider({ children })
         querySnapshot = await getDocs(q);
 
         const categories = [];
-        querySnapshot.docs.forEach(doc => {categories.push(doc.data())});
+        querySnapshot.docs.forEach(doc => {categories.push({id: doc.id, data: doc.data()})});
 
         setUserCategories(categories);
     }
