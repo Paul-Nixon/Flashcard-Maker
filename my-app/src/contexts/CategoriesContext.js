@@ -28,7 +28,8 @@ export function CategoriesProvider({ children })
         },
         docRef = await addDoc(collection(db, "categories"), docData);
 
-        
+        if (userCategories.length === 0) setUserCategories([{id: docRef.id, data: docData}]);
+        else setUserCategories([...userCategories, {id: docRef.id, data: docData}]);
     }
 
     async function addFlashcard(newFlashcard, categoryOwner, categoryName)

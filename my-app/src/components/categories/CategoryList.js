@@ -12,7 +12,7 @@ export default function CategoryList({ categories, renderNewFlashcardPage ,rende
         <ul className={styles.categoriesList}>
             {categories.map(category => {
                 return <AuthProvider>
-                    <CategoriesProvider><Category name={category.name} key={category.id}
+                    <CategoriesProvider><Category name={category["data"].name} key={category["id"]}
                     renderFlashcardsPage={renderFlashcardsPage}
                     renderNewFlashcardPage={renderNewFlashcardPage} /></CategoriesProvider>
                 </AuthProvider>
