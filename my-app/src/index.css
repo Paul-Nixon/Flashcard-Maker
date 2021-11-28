@@ -121,3 +121,47 @@ button
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
+
+.modal--flex
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.modal--btn--wrapper
+{
+    width: 100%;
+}
+
+.modal--btn
+{
+    text-transform: uppercase;
+    font-size: 1.125rem;
+    border: 2px solid #9a0026;
+}
+
+.modal--btn--primary
+{
+    background-color: transparent;
+    color: #9a0026;
+}
+
+.modal--btn--primary:hover
+{
+    background-color: #9a0026;
+    color: white;
+}
+
+.modal--btn--alt
+{
+    background-color: #9a0026;
+    color: white;
+}
+
+.modal--btn--alt:hover
+{
+    background-color: #790824;
+}
