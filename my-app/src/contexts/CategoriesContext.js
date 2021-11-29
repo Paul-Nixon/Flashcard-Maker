@@ -51,17 +51,11 @@ export function CategoriesProvider({ children })
         }
     }
 
-    async function removeCategory(categoryName)
+    async function removeCategory(categoryID, categoryName)
     {
-        for (const category in userCategories)
-        {
-            if (category["data"].name === categoryName)
-            {
-                db.collection("categories").doc(category["id"]).delete;
-                setUserCategories(userCategories.filter(category => category["data"].name !== categoryName));
-                break;
-            }
-        }
+        await db.collection("categories").doc(categoryID).delete();
+        setUserCategories(userCategories.filter(category => category["data"].name !== categoryName));
+        return userCategories;
     }
 
     function fetchFlashcards(categoryName)

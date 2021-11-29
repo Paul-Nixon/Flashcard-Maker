@@ -133,7 +133,7 @@ button
 
 .modal--btn--wrapper
 {
-    width: 100%;
+    margin-top: 1rem;
 }
 
 .modal--btn
@@ -147,6 +147,7 @@ button
 {
     background-color: transparent;
     color: #9a0026;
+    margin-right: 1rem;
 }
 
 .modal--btn--primary:hover
