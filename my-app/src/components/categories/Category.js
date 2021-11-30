@@ -9,7 +9,7 @@ import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
 
 
-export default function Category({ name, renderNewFlashcardPage, renderFlashcardsPage, refreshList, id }) {
+export default function Category({ name, renderNewFlashcardPage, renderFlashcardsPage, id }) {
     
     const categoriesCtx = useContext(CategoriesContext),
     [modal, setModal] = useState(<Modal />),
@@ -27,7 +27,6 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
     {
         const newList = categoriesCtx.removeCategory(id, name);
         removeModalHandler();
-        refreshList(newList);
     }
 
 
@@ -37,7 +36,7 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
 
             <div className={styles.categoryOptions}>
                 <button className={styles.categoryOptionBtn} onClick={() => {
-                    renderNewFlashcardPage(name)
+                    renderNewFlashcardPage(name, id)
                 }}>Add New Flashcard</button>
                 <button className={styles.categoryOptionBtn} onClick={() => {
                     renderFlashcardsPage();

@@ -7,7 +7,7 @@ import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getD
 const CategoriesContext = React.createContext({
     userCategories: [],
     addCategory: (categoryName, categoryOwner) => {},
-    addFlashcard: (newFlashcard, categoryOwner, categoryName) => {},
+    addFlashcard: (newFlashcard, categoryName, categoryID) => {},
     removeCategory: (categoryName, categoryOwner) => {},
     fetchFlashcards: (categoryName, categoryOwner) => {},
     fetchAllCategories: (categoryOwner) => {}
@@ -32,19 +32,18 @@ export function CategoriesProvider({ children })
         else setUserCategories([...userCategories, {id: docRef.id, data: docData}]);
     }
 
-    async function addFlashcard(newFlashcard, categoryOwner, categoryName)
+    async function addFlashcard(newFlashcard, categoryName, categoryID)
     {
-        const querySnapshot = await db.collection("categories").where("owner", "==", categoryOwner)
-        .where("name", "==", categoryName).get();
+        const querySnapshot = doc(db, "categories", categoryID);
 
         await updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
 
         for (let i = 0; i >= userCategories.length; i++)
         {
-            if (userCategories[i].name === categoryName)
+            if (userCategories[i].data.name === categoryName)
             {
                 const categories = userCategories;
-                categories[i].flashcards.push(newFlashcard);
+                categories[i].data.flashcards.push(newFlashcard);
                 setUserCategories(categories);
                 return;
             }

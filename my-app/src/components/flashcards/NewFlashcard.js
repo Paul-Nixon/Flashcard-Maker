@@ -10,7 +10,7 @@ import Card from "../ui/Card";
 import useFormValidation from '../custom_hooks/useFormValidation';
 
 
-export default function NewFlashcard({ categoryName }) {
+export default function NewFlashcard({ categoryName, categoryID }) {
     
     const { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
@@ -60,7 +60,7 @@ export default function NewFlashcard({ categoryName }) {
                 options: [firstOption, secondOption, thirdOption]
             };
 
-            categoriesCtx.addFlashcard(newFlashcard, currentUser.email, categoryName);
+            categoriesCtx.addFlashcard(newFlashcard, categoryName, categoryID);
 
             setModal(<Modal>
                 <span class="close" onClick={removeModalHandler}>&times;</span>

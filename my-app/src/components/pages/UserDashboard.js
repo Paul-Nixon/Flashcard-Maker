@@ -19,6 +19,7 @@ export default function UserDashboard() {
     
     const [page, setPage] = useState("homepage"),
     [categoryName, setCategoryName] = useState(""),
+    [categoryID, setCategoryID] = useState(""),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext);
 
@@ -40,10 +41,11 @@ export default function UserDashboard() {
         setPage("newCategory");
     }
 
-    function renderNewFlashcardPage(categoryName)
+    function renderNewFlashcardPage(categoryName, categoryID)
     {
-        setPage("newFlashcard");
         setCategoryName(categoryName);
+        setCategoryID(categoryID);
+        setPage("newFlashcard");
     }
 
     function renderFlashcardsPage(categoryName)
@@ -67,7 +69,9 @@ export default function UserDashboard() {
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>
-                    <CategoriesProvider><NewFlashcard categoryName={categoryName} /></CategoriesProvider></AuthProvider>}
+                    <CategoriesProvider>
+                        <NewFlashcard categoryName={categoryName} categoryID={categoryID} />
+                    </CategoriesProvider></AuthProvider>}
                 {page === "flashcards" && <CategoriesProvider><FlashcardsPage categoryName={categoryName} /></CategoriesProvider>}
             </div>
         </div>
