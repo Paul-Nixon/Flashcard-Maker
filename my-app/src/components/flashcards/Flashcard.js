@@ -1,6 +1,6 @@
 import './Flashcard.css';
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 
 export default function Flashcard({ flashcard }) {

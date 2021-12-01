@@ -6,10 +6,10 @@ import FlashcardList from "../flashcards/FlashcardList";
 import CategoriesContext from '../../contexts/CategoriesContext';
 
 
-export default function FlashcardsPage({ categoryName }) {
+export default function FlashcardsPage({ categoryID }) {
     
     const categoriesCtx = useContext(CategoriesContext),
-    flashcards = categoriesCtx.fetchFlashcards(categoryName);
+    flashcards = categoriesCtx.fetchFlashcards(categoryID);
 
     
     return (

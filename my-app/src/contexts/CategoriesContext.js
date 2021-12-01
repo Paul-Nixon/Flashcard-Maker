@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
-import { addDoc, doc, deleteDoc, collection, updateDoc, arrayUnion, getDoc, getDocs,
-    query, where, serverTimestamp} from "firebase/firestore";
+import { addDoc, doc, collection, updateDoc, arrayUnion, getDoc, getDocs, query, where} from "firebase/firestore";
 
 
 const CategoriesContext = React.createContext({
     userCategories: [],
     addCategory: (categoryName, categoryOwner) => {},
-    addFlashcard: (newFlashcard, categoryName, categoryID) => {},
+    addFlashcard: (flashcardData, categoryID) => {},
     removeCategory: (categoryName, categoryOwner) => {},
     fetchFlashcards: (categoryName, categoryOwner) => {},
     fetchAllCategories: (categoryOwner) => {}
@@ -32,40 +31,39 @@ export function CategoriesProvider({ children })
         else setUserCategories([...userCategories, {id: docRef.id, data: docData}]);
     }
 
-    async function addFlashcard(newFlashcard, categoryName, categoryID)
+    async function addFlashcard(flashcardData, categoryID)
     {
-        const querySnapshot = doc(db, "categories", categoryID);
-
-        await updateDoc(querySnapshot, {flashcards: arrayUnion(newFlashcard)});
-
-        for (let i = 0; i >= userCategories.length; i++)
+        const newFlashcard = 
         {
-            if (userCategories[i].data.name === categoryName)
-            {
-                const categories = userCategories;
-                categories[i].data.flashcards.push(newFlashcard);
-                setUserCategories(categories);
-                return;
-            }
-        }
+            question: flashcardData.question,
+            answer: flashcardData.answer,
+            options: flashcardData.options,
+            id: Date.now()
+        },
+        docRef = doc(db, "categories", categoryID),
+        categories = userCategories,
+        categoryIndex = userCategories.findIndex(category => category["data"].id === categoryID),
+        updatedCategory = categories.splice(categoryIndex, 1);
+
+        await updateDoc(docRef, {flashcards: arrayUnion(newFlashcard)});
+        updatedCategory.map(category => category["data"].flashcards.push(newFlashcard));
+
+        setUserCategories(categories.concat(updatedCategory));
     }
 
-    async function removeCategory(categoryID, categoryName)
+    async function removeCategory(categoryID)
     {
         await db.collection("categories").doc(categoryID).delete();
-        setUserCategories(userCategories.filter(category => category["data"].name !== categoryName));
-        return userCategories;
+        setUserCategories(userCategories.filter(category => category["data"].id !== categoryID));
     }
 
-    function fetchFlashcards(categoryName)
+    function fetchFlashcards(categoryID)
     {
-        for (let i = 0; i >= userCategories.length; i++)
-        {
-            if (userCategories[i].name === categoryName)
-            {
-                return userCategories[i].flashcards;
-            }
-        }
+        const categories = userCategories,
+        categoryIndex = userCategories.findIndex(category => category["data"].id === categoryID),
+        category = categories.splice(categoryIndex, 1);
+
+        return category["data"].flashcards;
     }
 
     async function fetchAllCategories(categoryOwner)

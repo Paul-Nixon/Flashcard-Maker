@@ -25,7 +25,7 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
 
     async function removeCategoryHandler()
     {
-        const newList = categoriesCtx.removeCategory(id, name);
+        categoriesCtx.removeCategory(id);
         removeModalHandler();
     }
 
@@ -36,10 +36,10 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
 
             <div className={styles.categoryOptions}>
                 <button className={styles.categoryOptionBtn} onClick={() => {
-                    renderNewFlashcardPage(name, id)
+                    renderNewFlashcardPage(id)
                 }}>Add New Flashcard</button>
                 <button className={styles.categoryOptionBtn} onClick={() => {
-                    renderFlashcardsPage();
+                    renderFlashcardsPage(id);
                 }}>View Flashcards</button>
                 <FontAwesomeIcon icon={faTrash} className={styles.categoryTrashBtn} onClick={() => {
                     setModal(<Modal>

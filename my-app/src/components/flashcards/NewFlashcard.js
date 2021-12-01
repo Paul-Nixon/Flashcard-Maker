@@ -2,7 +2,6 @@ import styles from './NewFlashcard.module.css';
 
 import { useContext, useState } from 'react';
 
-import AuthContext from "../../contexts/AuthContext";
 import CategoriesContext from "../../contexts/CategoriesContext";
 import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
@@ -10,10 +9,9 @@ import Card from "../ui/Card";
 import useFormValidation from '../custom_hooks/useFormValidation';
 
 
-export default function NewFlashcard({ categoryName, categoryID }) {
+export default function NewFlashcard({ categoryID }) {
     
-    const { currentUser } = useContext(AuthContext),
-    categoriesCtx = useContext(CategoriesContext),
+    const categoriesCtx = useContext(CategoriesContext),
     [modalIsRendered, setModalIsRendered] = useState(false),
     [backdropIsRendered, setBackdropIsRendered] = useState(false),
     [modal, setModal] = useState(<Modal />),
@@ -53,14 +51,14 @@ export default function NewFlashcard({ categoryName, categoryID }) {
 
         try
         {
-            const newFlashcard = 
+            const flashcardData = 
             {
                 question,
                 answer,
                 options: [firstOption, secondOption, thirdOption]
             };
 
-            categoriesCtx.addFlashcard(newFlashcard, categoryName, categoryID);
+            categoriesCtx.addFlashcard(flashcardData, categoryID);
 
             setModal(<Modal>
                 <span class="close" onClick={removeModalHandler}>&times;</span>
