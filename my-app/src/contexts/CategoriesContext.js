@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
-import { addDoc, doc, collection, updateDoc, arrayUnion, getDoc, getDocs, query, where} from "firebase/firestore";
+import { addDoc, doc, collection, updateDoc, arrayUnion, getDocs, query, where} from "firebase/firestore";
 
 
 const CategoriesContext = React.createContext({
@@ -42,7 +42,7 @@ export function CategoriesProvider({ children })
         },
         docRef = doc(db, "categories", categoryID),
         categories = userCategories,
-        categoryIndex = userCategories.findIndex(category => category["data"].id === categoryID),
+        categoryIndex = userCategories.findIndex(category => category["id"] === categoryID),
         updatedCategory = categories.splice(categoryIndex, 1);
 
         await updateDoc(docRef, {flashcards: arrayUnion(newFlashcard)});
@@ -54,16 +54,16 @@ export function CategoriesProvider({ children })
     async function removeCategory(categoryID)
     {
         await db.collection("categories").doc(categoryID).delete();
-        setUserCategories(userCategories.filter(category => category["data"].id !== categoryID));
+        setUserCategories(userCategories.filter(category => category["id"] !== categoryID));
     }
 
     function fetchFlashcards(categoryID)
     {
         const categories = userCategories,
-        categoryIndex = userCategories.findIndex(category => category["data"].id === categoryID),
+        categoryIndex = userCategories.findIndex(category => category.id === categoryID),
         category = categories.splice(categoryIndex, 1);
 
-        return category["data"].flashcards;
+        return category[0].data.flashcards;
     }
 
     async function fetchAllCategories(categoryOwner)
