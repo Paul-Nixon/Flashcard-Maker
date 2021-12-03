@@ -37,8 +37,8 @@
 .flashcard .front, .flashcard .back
 {
     position: absolute;
-    padding: 1rem;
     backface-visibility: hidden;
+    padding: 1rem;
 }
 
 .flashcard-options
@@ -50,6 +50,7 @@
 {
     color: #555;
     font-size: .75rem;
+    text-align: left;
 }
 
 .flashcard-option + .flashcard-option
