@@ -1,13 +1,13 @@
 import styles from './FlashcardsPage.module.css';
 
-import FlashcardList from "../flashcards/FlashcardList";
+import Carousel from '../layout/Carousel';
 
 
 export default function FlashcardsPage({ flashcards }) {
     
     return (
         <div className={styles.flashcardPage}>
-            <FlashcardList flashcards={flashcards} />
+            <Carousel flashcards={flashcards} />
         </div>
     )
 }
