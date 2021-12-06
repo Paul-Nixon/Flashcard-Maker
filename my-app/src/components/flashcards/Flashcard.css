@@ -11,9 +11,6 @@
     transition: transform 150ms ease-in-out;
     cursor: pointer;
     transform: perspective(1500px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
-    flex: 2;
-    height: 70%;
-    margin: 0 1rem;
 }
 
 .flashcard:hover
@@ -30,6 +27,7 @@
 .flashcard .front
 {
     left: 0;
+    flex-wrap: wrap;
 }
 
 .flashcard .back
@@ -46,7 +44,9 @@
 
 .flashcard-question
 {
-    flex: 6 0 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
 }
 
 .flashcard-options

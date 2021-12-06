@@ -19,28 +19,24 @@ export default function Carousel({ flashcards }) {
         if (slideIndex !== 0)
         {
             setSlideIndex(slideIndex - 1);
-            inputRef.current.value = slideIndex - 1;
         }
 
         else
         {
             setSlideIndex(flashcards.length - 1);
-            inputRef.current.value = flashcards.length;
         }
     }
 
     function nextSlide()
     {
-        if (slideIndex !== flashcards.length)
+        if (slideIndex !== flashcards.length - 1)
         {
             setSlideIndex(slideIndex + 1);
-            inputRef.current.value = slideIndex + 1;
         }
 
         else
         {
             setSlideIndex(0);
-            inputRef.current.value = 1;
         }
 
     }
