@@ -1,8 +1,5 @@
 .flashcard
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     border-radius: .25rem;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
@@ -11,6 +8,7 @@
     transition: transform 150ms ease-in-out;
     cursor: pointer;
     transform: perspective(1500px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+
 }
 
 .flashcard:hover
@@ -37,7 +35,6 @@
 
 .flashcard .front, .flashcard .back
 {
-    position: absolute;
     backface-visibility: hidden;
     padding: 1rem;
 }
@@ -57,7 +54,7 @@
 .flashcard-option
 {
     color: #555;
-    font-size: .75rem;
+    font-size: 0.75rem;
     text-align: left;
 }
 

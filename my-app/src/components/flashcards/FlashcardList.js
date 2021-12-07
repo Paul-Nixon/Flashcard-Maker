@@ -1,6 +1,7 @@
 import styles from "./FlashcardList.module.css";
 
 import Flashcard from './Flashcard';
+import Card from "../ui/Card";
 
 
 export default function FlashcardList({ flashcards }) {

@@ -26,7 +26,7 @@ export default function Flashcard({ flashcard }) {
     return (
         <div className={`flashcard ${flip ? "flip" : ""}`} onClick={() => setFlip(!flip)} style={{height: height}}>
             <div className="front" ref={frontSide}>
-                <div className="flashcard-question">{flashcard.question}</div>
+                {flashcard.question}
                 <div className="flashcard-options">
                     {flashcard.options.map(option => {
                         return <div className="flashcard-option">{option}</div>
