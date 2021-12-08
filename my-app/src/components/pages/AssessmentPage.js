@@ -1,8 +1,12 @@
-import React from 'react'
+import styles from './AssessmentPage.module.css';
 
-export default function AssessmentPage() {
+import Quiz from "./Quiz";
+import Test from "./Test";
+
+
+export default function AssessmentPage(props) {
     return (
-        <div>
+        <div className={styles.assessmentPage}>
             
         </div>
     )

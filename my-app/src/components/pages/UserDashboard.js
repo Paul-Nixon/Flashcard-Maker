@@ -13,6 +13,7 @@ import AuthContext from "../../contexts/AuthContext";
 import CategoriesContext from "../../contexts/CategoriesContext";
 import FlashcardsPage from './FlashcardsPage';
 import useEffectOnce from "../custom_hooks/useEffectOnce";
+import AssessmentPage from './AssessmentPage';
 
 
 export default function UserDashboard() {
@@ -20,6 +21,7 @@ export default function UserDashboard() {
     const [page, setPage] = useState("homepage"),
     [categoryID, setCategoryID] = useState(""),
     [flashcards, setFlashcards] = useState([]),
+    [assessmentType, setAssessmentType] = useState(""),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext);
 
@@ -53,6 +55,13 @@ export default function UserDashboard() {
         setPage("flashcards");
     }
 
+    function renderAssessmentPage(assessmentType)
+    {
+        setFlashcards(categoriesCtx.fetchFlashcards(categoryID));
+        setAssessmentType(assessmentType);
+        setPage("assessment");
+    }
+
 
     return (
         <div className={styles.userDashboard}>
@@ -64,7 +73,8 @@ export default function UserDashboard() {
                 {page === "homepage" && <UserHomepage />}
                 {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
                     renderNewFlashcardPage={renderNewFlashcardPage}
-                    renderFlashcardsPage={renderFlashcardsPage} categories={categoriesCtx.userCategories} />}
+                    renderFlashcardsPage={renderFlashcardsPage}
+                    renderAssessmentPage={renderAssessmentPage} categories={categoriesCtx.userCategories} />}
                 {page === "newCategory" && <AuthProvider>
                     <CategoriesProvider><NewCategory /></CategoriesProvider></AuthProvider>}
                 {page === "newFlashcard" && <AuthProvider>
@@ -72,6 +82,7 @@ export default function UserDashboard() {
                         <NewFlashcard categoryID={categoryID} />
                     </CategoriesProvider></AuthProvider>}
                 {page === "flashcards" && <FlashcardsPage flashcards={flashcards} />}
+                {page === "assessment" && <AssessmentPage flashcards={flashcards} type={assessmentType} />}
             </div>
         </div>
     )

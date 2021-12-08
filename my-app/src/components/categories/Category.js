@@ -9,7 +9,7 @@ import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
 
 
-export default function Category({ name, renderNewFlashcardPage, renderFlashcardsPage, id }) {
+export default function Category({ name, renderNewFlashcardPage, renderFlashcardsPage, renderAssessmentPage, id }) {
     
     const categoriesCtx = useContext(CategoriesContext),
     [modal, setModal] = useState(<Modal />),
@@ -41,6 +41,19 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
                 <button className={styles.categoryOptionBtn} onClick={() => {
                     renderFlashcardsPage(id);
                 }}>View Flashcards</button>
+                <button className={styles.categoryOptionBtn} onClick={() => {
+                    if (categoriesCtx.fetchFlashcards(id).length >= 10) renderAssessmentPage("quiz");
+
+                    setModal(<Modal>
+                        <span class="close" onClick={removeModalHandler}>&times;</span>
+                        This category doesn't have at least 10 flashcards.
+                    </Modal>);
+                    setModalIsRendered(true);
+                    setBackdropIsRendered(true);
+                }}>Take Quiz</button>
+                <button className={styles.categoryOptionBtn} onClick={() => {
+                    renderFlashcardsPage(id);
+                }}>Take Test</button>
                 <FontAwesomeIcon icon={faTrash} className={styles.categoryTrashBtn} onClick={() => {
                     setModal(<Modal>
                         <div className="modal--flex">

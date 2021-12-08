@@ -4,7 +4,7 @@ import Category from './Category';
 import { CategoriesProvider } from '../../contexts/CategoriesContext';
 
 
-export default function CategoryList({ categories, renderNewFlashcardPage, renderFlashcardsPage }) {
+export default function CategoryList({ categories, renderNewFlashcardPage, renderFlashcardsPage, renderAssessmentPage }) {
 
 
     return (
@@ -12,7 +12,8 @@ export default function CategoryList({ categories, renderNewFlashcardPage, rende
             {categories.map(category => {
                 return <CategoriesProvider><Category name={category["data"].name} id={category["id"]}
                 key={category["id"]} renderFlashcardsPage={renderFlashcardsPage}
-                renderNewFlashcardPage={renderNewFlashcardPage} /></CategoriesProvider>
+                renderNewFlashcardPage={renderNewFlashcardPage}
+                renderAssessmentPage={renderAssessmentPage} /></CategoriesProvider>
             })}
         </ul>
     )
