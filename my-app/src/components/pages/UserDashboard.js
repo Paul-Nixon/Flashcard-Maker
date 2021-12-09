@@ -55,7 +55,7 @@ export default function UserDashboard() {
         setPage("flashcards");
     }
 
-    function renderAssessmentPage(assessmentType)
+    function renderAssessmentPage(assessmentType, categoryID)
     {
         setFlashcards(categoriesCtx.fetchFlashcards(categoryID));
         setAssessmentType(assessmentType);

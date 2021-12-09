@@ -29,6 +29,69 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
         removeModalHandler();
     }
 
+    function renderQuizInfo()
+    {
+        if (categoriesCtx.fetchFlashcards(id).length >= 10)
+            {
+                setModal(<Modal>
+                    <div className="modal--flex">
+                        You will be taking a quiz with 10 random questions taken from
+                        this category.
+                        <div className="modal--btn--wrapper">
+                            <button className="modal--btn modal--btn--primary"
+                            onClick={removeModalHandler}>cancel</button>
+                            <button className="modal--btn modal--btn--alt"
+                            onClick={() => renderAssessmentPage("quiz", id)}>start</button>
+                        </div>
+                    </div>
+                </Modal>)
+                setModalIsRendered(true);
+                setBackdropIsRendered(true);
+            }
+
+            else
+            {
+                setModal(<Modal>
+                    <span class="close" onClick={removeModalHandler}>&times;</span>
+                    This category doesn't have at least 10 flashcards.
+                </Modal>);
+                setModalIsRendered(true);
+                setBackdropIsRendered(true);
+            }
+    }
+
+    function renderTestInfo()
+    {
+        if (categoriesCtx.fetchFlashcards(id).length >= 20)
+            {
+                setModal(<Modal>
+                    <div className="modal--flex">
+                        You will be taking a test consisting of all of this category's
+                        questions.
+                        <div className="modal--btn--wrapper">
+                            <button className="modal--btn modal--btn--primary"
+                            onClick={removeModalHandler}>cancel</button>
+                            <button className="modal--btn modal--btn--alt"
+                            onClick={() => renderAssessmentPage("test", id)}>start</button>
+                        </div>
+                    </div>
+                </Modal>)
+                setModalIsRendered(true);
+                setBackdropIsRendered(true);
+            }
+            
+            else
+            {
+                setModal(<Modal>
+                    <span class="close" onClick={removeModalHandler}>&times;</span>
+                    This category doesn't have at least 20 flashcards.
+                </Modal>);
+                setModalIsRendered(true);
+                setBackdropIsRendered(true);
+            }
+    }
+
+
 
     return (
         <li className={styles.category}>
@@ -41,19 +104,8 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
                 <button className={styles.categoryOptionBtn} onClick={() => {
                     renderFlashcardsPage(id);
                 }}>View Flashcards</button>
-                <button className={styles.categoryOptionBtn} onClick={() => {
-                    if (categoriesCtx.fetchFlashcards(id).length >= 10) renderAssessmentPage("quiz");
-
-                    setModal(<Modal>
-                        <span class="close" onClick={removeModalHandler}>&times;</span>
-                        This category doesn't have at least 10 flashcards.
-                    </Modal>);
-                    setModalIsRendered(true);
-                    setBackdropIsRendered(true);
-                }}>Take Quiz</button>
-                <button className={styles.categoryOptionBtn} onClick={() => {
-                    renderFlashcardsPage(id);
-                }}>Take Test</button>
+                <button className={styles.categoryOptionBtn} onClick={renderQuizInfo}>Take Quiz</button>
+                <button className={styles.categoryOptionBtn} onClick={renderTestInfo}>Take Test</button>
                 <FontAwesomeIcon icon={faTrash} className={styles.categoryTrashBtn} onClick={() => {
                     setModal(<Modal>
                         <div className="modal--flex">
