@@ -1,6 +1,9 @@
 .flashcard
 {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: .25rem;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
     background-color: white;
@@ -8,7 +11,7 @@
     transition: transform 150ms ease-in-out;
     cursor: pointer;
     transform: perspective(1500px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
-
+    overflow-wrap: break-word;
 }
 
 .flashcard:hover
@@ -25,7 +28,6 @@
 .flashcard .front
 {
     left: 0;
-    flex-wrap: wrap;
 }
 
 .flashcard .back
@@ -37,6 +39,7 @@
 {
     backface-visibility: hidden;
     padding: 1rem;
+    position: absolute;
 }
 
 .flashcard-question
@@ -44,6 +47,7 @@
     text-align: left;
     display: flex;
     align-items: center;
+    margin: 0;
 }
 
 .flashcard-options
