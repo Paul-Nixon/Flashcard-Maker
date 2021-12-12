@@ -1,9 +1,15 @@
-import React from 'react'
+import styles from './Assessment.module.css'
 
-export default function Quiz() {
+import Carousel from '../layout/Carousel';
+
+
+export default function Quiz({ questions }) {
+    
+    
+    
     return (
-        <div>
-            
+        <div className={styles.assessment}>
+            <Carousel flashcards={questions} />
         </div>
     )
 }

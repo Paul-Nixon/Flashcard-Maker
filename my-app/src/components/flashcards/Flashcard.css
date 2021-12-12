@@ -40,19 +40,20 @@
     backface-visibility: hidden;
     padding: 1rem;
     position: absolute;
+    max-width: 100%;
 }
 
 .flashcard-question
 {
     text-align: left;
-    display: flex;
-    align-items: center;
     margin: 0;
+    overflow-wrap: break-word;
 }
 
 .flashcard-options
 {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    overflow-wrap: break-word;
 }
 
 .flashcard-option
