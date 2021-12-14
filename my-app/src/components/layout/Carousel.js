@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import Flashcard from '../flashcards/Flashcard';
+import Question from '../ui/Question';
 
 
 export default function Carousel({ flashcards }) {
@@ -54,7 +55,7 @@ export default function Carousel({ flashcards }) {
             <div className="carousel-main-content">
                 <FontAwesomeIcon icon={faArrowLeft} fixedWidth className="carousel-icon"
                 onClick={prevSlide} />
-                <Flashcard flashcard={flashcards[slideIndex]} />
+                <Question flashcard={flashcards[slideIndex]} />
                 <FontAwesomeIcon icon={faArrowRight} fixedWidth className="carousel-icon"
                 onClick={nextSlide} />
             </div>

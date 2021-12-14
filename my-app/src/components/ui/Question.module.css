@@ -1,0 +1,36 @@
+.questionWrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.question
+{
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+.choices
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice + .choice
+{
+    margin-top: 0.5rem;
+}
+
+.choiceLabel
+{
+    font-size: 1.125rem;
+}
