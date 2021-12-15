@@ -6,7 +6,7 @@ import Test from "./Test";
 import useEffectOnce from "../custom_hooks/useEffectOnce";
 
 
-export default function AssessmentPage({ flashcards, assessmentType }) {
+export default function AssessmentPage({ flashcards, type }) {
     
     useEffectOnce(() => randomizeQuestions());
 
@@ -25,8 +25,8 @@ export default function AssessmentPage({ flashcards, assessmentType }) {
 
     return (
         <div className={styles.assessmentPage}>
-            {assessmentType === "quiz" && <Quiz questions={flashcards} />}
-            {assessmentType === "test" && <Test questions={flashcards} />}
+            {type === "quiz" && <Quiz questions={flashcards} />}
+            {type === "test" && <Test questions={flashcards} />}
         </div>
     )
 }

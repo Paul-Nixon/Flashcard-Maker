@@ -1,8 +1,9 @@
 .questionWrapper
 {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     border-radius: 0.5rem;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
     background-color: white;
@@ -16,13 +17,14 @@
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.2;
+    text-align: left;
 }
 
 .choices
 {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .choice + .choice
@@ -33,4 +35,6 @@
 .choiceLabel
 {
     font-size: 1.125rem;
+    margin-left: 0.5rem;
+    text-align: left;
 }

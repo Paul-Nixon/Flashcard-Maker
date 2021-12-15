@@ -55,7 +55,7 @@ export default function Carousel({ flashcards }) {
             <div className="carousel-main-content">
                 <FontAwesomeIcon icon={faArrowLeft} fixedWidth className="carousel-icon"
                 onClick={prevSlide} />
-                <Question flashcard={flashcards[slideIndex]} />
+                <Question question={flashcards[slideIndex]} />
                 <FontAwesomeIcon icon={faArrowRight} fixedWidth className="carousel-icon"
                 onClick={nextSlide} />
             </div>
