@@ -54,8 +54,12 @@ export default function NewFlashcard({ categoryID }) {
             const flashcardData = 
             {
                 question,
-                answer,
-                options: [firstOption, secondOption, thirdOption]
+                options: [
+                    {answerText: answer, isCorrect: true},
+                    {answerText: firstOption, isCorrect: false},
+                    {answerText: secondOption, isCorrect: false},
+                    {answerText: thirdOption, isCorrect: false}
+                ]
             };
 
             categoriesCtx.addFlashcard(flashcardData, categoryID);

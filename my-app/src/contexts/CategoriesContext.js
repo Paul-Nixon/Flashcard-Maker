@@ -36,7 +36,6 @@ export function CategoriesProvider({ children })
         const newFlashcard = 
         {
             question: flashcardData.question,
-            answer: flashcardData.answer,
             options: flashcardData.options,
             id: Date.now()
         },
@@ -62,6 +61,7 @@ export function CategoriesProvider({ children })
         const categories = userCategories,
         categoryIndex = userCategories.findIndex(category => category.id === categoryID),
         category = categories.splice(categoryIndex, 1);
+        setUserCategories(categories.concat(category));
 
         return category[0].data.flashcards;
     }

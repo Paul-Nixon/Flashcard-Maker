@@ -8,7 +8,10 @@ import useEffectOnce from "../custom_hooks/useEffectOnce";
 
 export default function AssessmentPage({ flashcards, type }) {
     
-    useEffectOnce(() => randomizeQuestions());
+    useEffectOnce(() => {
+        randomizeQuestions();
+        flashcards.forEach(flashcard => randomizeOptions(flashcard.options));
+    });
 
 
     function randomizeQuestions()
@@ -19,6 +22,17 @@ export default function AssessmentPage({ flashcards, type }) {
             const temp = flashcards[i];
             flashcards[i] = flashcards[j];
             flashcards[j] = temp;
+        }
+    }
+
+    function randomizeOptions(options)
+    {
+        for (let i = options.length - 1; i > 0; i--)
+        {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = options[i];
+            options[i] = options[j];
+            options[j] = temp;
         }
     }
 
