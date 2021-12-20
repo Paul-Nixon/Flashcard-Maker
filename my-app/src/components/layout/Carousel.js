@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 import "./Carousel.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import Question from '../ui/Question';
 
@@ -52,10 +52,10 @@ export default function Carousel({ flashcards }) {
             </div>
 
             <div className="carousel-main-content">
-                <FontAwesomeIcon icon={faArrowLeft} fixedWidth className="carousel-icon"
+                <FontAwesomeIcon icon={faChevronLeft} fixedWidth className="carousel-icon"
                 onClick={prevSlide} />
                 <Question question={flashcards[slideIndex]} />
-                <FontAwesomeIcon icon={faArrowRight} fixedWidth className="carousel-icon"
+                <FontAwesomeIcon icon={faChevronRight} fixedWidth className="carousel-icon"
                 onClick={nextSlide} />
             </div>
         </div>

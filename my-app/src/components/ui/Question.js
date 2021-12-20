@@ -7,16 +7,8 @@ export default function Question({ question }) {
             <p className={styles.question}>{question.question}</p>
 
             <div className={styles.choices}>
-                <div className={styles.choice}>
-                    <input type="radio" id={`${question.answer}`} name="choice" value={`${question.answer}`} />
-                    <label htmlFor={`${question.answer}`} className={styles.choiceLabel}>{question.answer}</label>
-                </div>
-
-                {question.options.map(option => {
-                    return <div className={styles.choice}>
-                        <input type="radio" id={`${option}`} name="choice" value={`${option}`} />
-                        <label htmlFor={`${option}`} className={styles.choiceLabel}>{option}</label>
-                    </div>
+                {question.options.map(answerOption => {
+                    return <button className={styles.questionBtn}>{answerOption.answerText}</button>
                 })}
             </div>
 

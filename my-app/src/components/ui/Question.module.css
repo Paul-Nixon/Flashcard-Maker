@@ -30,21 +30,23 @@
     max-width: 100%;
 }
 
-.choice
+.questionBtn
 {
-    
+    color: white;
+    font-size: 1.125rem;
+    background-color: #F28C38;
+    border-radius: 0.9375rem;
+    border: 3px solid #389EF2;
+    padding: 0.625rem;
+    text-align: left;
 }
 
+.questionBtn:hover
+{
+    background-color: #C2702D;
+}
 
 .choice + .choice
 {
     margin-top: 0.5rem;
-}
-
-.choiceLabel
-{
-    font-size: 1.125rem;
-    margin-left: 0.5rem;
-    text-align: left;
-    overflow-wrap: break-word;
 }
