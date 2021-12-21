@@ -39,8 +39,8 @@ export default function AssessmentPage({ flashcards, type }) {
 
     return (
         <div className={styles.assessmentPage}>
-            {type === "quiz" && <Quiz questions={flashcards} type={type} />}
-            {type === "test" && <Test questions={flashcards} type={type} />}
+            {type === "quiz" && <Quiz questions={flashcards} />}
+            {type === "test" && <Test questions={flashcards} />}
         </div>
     )
 }

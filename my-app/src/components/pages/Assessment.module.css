@@ -3,3 +3,9 @@
     width: 100%;
     height: 100%;
 }
+
+.questionCount
+{
+    font-size: 1.125rem;
+    color: white;
+}

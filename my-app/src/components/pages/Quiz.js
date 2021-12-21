@@ -2,17 +2,20 @@ import styles from './Assessment.module.css'
 
 import { useState } from 'react'
 
-import Carousel from '../layout/Carousel';
+import Question from '../ui/Question';
 
 
-export default function Quiz({ questions, type }) {
+export default function Quiz({ questions }) {
     
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(0),
+    [currentQuestion, setCurrentQuestion] = useState(0);
 
 
     function answerOptionClickHandler(isCorrect)
     {
-        // TODO: Handle what happens when the user clicks an answer.
+        if (isCorrect) setScore(score + 10);
+
+        if (currentQuestion < questions.length) setCurrentQuestion(currentQuestion + 1);
     }
 
     function addQuizData()
@@ -23,7 +26,9 @@ export default function Quiz({ questions, type }) {
     
     return (
         <div className={styles.assessment}>
-            <Carousel flashcards={questions} />
+            <div className={styles.questionCount}>Question {currentQuestion + 1} of {questions.length}</div>
+            
+            <Question question={questions[currentQuestion]} />
         </div>
     )
 }
