@@ -1,12 +1,12 @@
 import styles from './AssessmentPage.module.css';
 
-
 import Quiz from "./Quiz";
 import Test from "./Test";
 import useEffectOnce from "../custom_hooks/useEffectOnce";
+import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
 
 
-export default function AssessmentPage({ flashcards, type }) {
+export default function AssessmentPage({ flashcards, type, user }) {
     
     useEffectOnce(() => {
         randomizeQuestions();
@@ -39,8 +39,8 @@ export default function AssessmentPage({ flashcards, type }) {
 
     return (
         <div className={styles.assessmentPage}>
-            {type === "quiz" && <Quiz questions={flashcards} />}
-            {type === "test" && <Test questions={flashcards} />}
+            {type === "quiz" && <AssessmentsProvider><Quiz questions={flashcards} user={user} /></AssessmentsProvider>}
+            {type === "test" && <AssessmentsProvider><Test questions={flashcards} user={user} /></AssessmentsProvider>}
         </div>
     )
 }

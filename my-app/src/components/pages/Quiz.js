@@ -1,14 +1,16 @@
 import styles from './Assessment.module.css'
 
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 import Question from '../ui/Question';
+import AssessmentsContext from '../../contexts/AssessmentsContext';
 
 
-export default function Quiz({ questions }) {
+export default function Quiz({ questions, user }) {
     
     const [score, setScore] = useState(0),
-    [currentQuestion, setCurrentQuestion] = useState(0);
+    [currentQuestion, setCurrentQuestion] = useState(0),
+    AssessmentsCtx = useContext(AssessmentsContext);
 
 
     function answerOptionClickHandler(isCorrect)
@@ -16,11 +18,16 @@ export default function Quiz({ questions }) {
         if (isCorrect) setScore(score + 10);
 
         if (currentQuestion < questions.length) setCurrentQuestion(currentQuestion + 1);
+        else addQuizData();
     }
 
     function addQuizData()
     {
-        // TODO: Send the quiz's data to Firebase.
+        const quizData =
+        {
+            user,
+            score
+        }
     }
 
     
@@ -28,7 +35,7 @@ export default function Quiz({ questions }) {
         <div className={styles.assessment}>
             <div className={styles.questionCount}>Question {currentQuestion + 1} of {questions.length}</div>
             
-            <Question question={questions[currentQuestion]} />
+            <Question question={questions[currentQuestion]} onOptionClick={answerOptionClickHandler} />
         </div>
     )
 }
