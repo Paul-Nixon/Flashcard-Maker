@@ -1,9 +1,9 @@
 import styles from './AssessmentPage.module.css';
 
-import Quiz from "./Quiz";
-import Test from "./Test";
+
 import useEffectOnce from "../custom_hooks/useEffectOnce";
 import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
+import Assessment from './Assessment';
 
 
 export default function AssessmentPage({ flashcards, type, user }) {
@@ -39,8 +39,7 @@ export default function AssessmentPage({ flashcards, type, user }) {
 
     return (
         <div className={styles.assessmentPage}>
-            {type === "quiz" && <AssessmentsProvider><Quiz questions={flashcards} user={user} /></AssessmentsProvider>}
-            {type === "test" && <AssessmentsProvider><Test questions={flashcards} user={user} /></AssessmentsProvider>}
+            <AssessmentsProvider><Assessment questions={flashcards} user={user} type={type} /></AssessmentsProvider>
         </div>
     )
 }
