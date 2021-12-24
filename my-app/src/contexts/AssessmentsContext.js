@@ -1,18 +1,17 @@
 import React from "react";
 import { db } from "../firebase";
-import { addDoc, doc, collection, getDocs, query, where, serverTimestamp} from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where, serverTimestamp} from "firebase/firestore";
 
 
 const AssessmentsContext = React.createContext({
-    addAssessment: (assessmentData, type) => {},
-    fetchQuizData: () => {},
-    fetchTestData: () => {}
+    addAssessment: (type, assessmentData) => {},
+    fetchAssessmentData: (type, user) => {}
 });
 
 
 export function AssessmentsProvider({ children })
 {
-    async function addAssessment(assessmentData, type)
+    async function addAssessment(type, assessmentData)
     {
         switch (type)
         {
@@ -29,24 +28,38 @@ export function AssessmentsProvider({ children })
                     score: assessmentData.score,
                     takenAt: serverTimestamp()
                 });
+                break;
         }
     }
 
-    async function fetchQuizData()
+    async function fetchAssessmentData(type, user)
     {
-        // TODO: Get the user's quiz data from Firebase.
-    }
+        let q, querySnapshot, assessments;
 
-    async function fetchTestData()
-    {
-        // TODO: Get the user's test data from Firebase.
-    }
+        switch (type)
+        {
+            case "quiz":
+                q = query(collection(db, "quizzes"), where("user", "==", user));
+                querySnapshot = await getDocs(q);
+                assessments = [];
 
+                querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
+                break;
+            case "test":
+                q = query(collection(db, "tests"), where("user", "==", user));
+                querySnapshot = await getDocs(q);
+                assessments = [];
+
+                querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
+                break;
+        }
+
+        return assessments;
+    }
 
     const value = {
         addAssessment,
-        fetchQuizData,
-        fetchTestData
+        fetchAssessmentData
     };
 
     return (

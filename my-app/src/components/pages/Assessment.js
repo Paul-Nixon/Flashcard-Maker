@@ -28,10 +28,10 @@ export default function Assessment({ questions, user, type }) {
         switch (type)
         {
             case "quiz":
-                assessmentsCtx.addAssessment({user, score}, type);
+                assessmentsCtx.addAssessment(type, {user, score});
                 break;
             case "test":
-                assessmentsCtx.addAssessment({user, score: (score / questions.length).toFixed(1)}, type);
+                assessmentsCtx.addAssessment(type, {user, score: (score / questions.length).toFixed(1)});
                 break;
         }
     }
