@@ -83,7 +83,7 @@ export default function UserDashboard() {
                     </CategoriesProvider></AuthProvider>}
                 {page === "flashcards" && <FlashcardsPage flashcards={flashcards} />}
                 {page === "assessment" && <AssessmentPage flashcards={flashcards} type={assessmentType}
-                user={currentUser.email} />}
+                user={currentUser.email} returntoCategories={renderCategoriesPage} />}
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
 import Assessment from './Assessment';
 
 
-export default function AssessmentPage({ flashcards, type, user }) {
+export default function AssessmentPage({ flashcards, type, user, returntoCategories }) {
     
     useEffectOnce(() => {
         randomizeQuestions();
@@ -39,7 +39,9 @@ export default function AssessmentPage({ flashcards, type, user }) {
 
     return (
         <div className={styles.assessmentPage}>
-            <AssessmentsProvider><Assessment questions={flashcards} user={user} type={type} /></AssessmentsProvider>
+            <AssessmentsProvider>
+                <Assessment questions={flashcards} user={user} type={type} returntoCategories={returntoCategories} />
+            </AssessmentsProvider>
         </div>
     )
 }

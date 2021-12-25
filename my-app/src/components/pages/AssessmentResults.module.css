@@ -1,0 +1,16 @@
+.assessmentResults
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    background-color: white;
+}
+
+.assessmentResult
+{
+    color: gold;
+    font-size: 1.25rem;
+}

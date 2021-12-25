@@ -4,23 +4,40 @@ import { useState, useContext } from 'react'
 
 import Question from '../ui/Question';
 import AssessmentsContext from '../../contexts/AssessmentsContext';
+import AssessmentResults from './AssessmentResults';
 
 
-export default function Assessment({ questions, user, type }) {
+export default function Assessment({ questions, user, type, returntoCategories }) {
         
     const [score, setScore] = useState(0),
     [currentQuestion, setCurrentQuestion] = useState(0),
+    [renderAssessment, setRenderAssessment] = useState(true),
+    [renderResults, setRenderResults] = useState(false),
+    [correctAnswers, setCorrectAnswers] = useState(0),
     assessmentsCtx = useContext(AssessmentsContext);
 
 
     function answerOptionClickHandler(isCorrect)
     {
-        if (isCorrect && type === "quiz") setScore(score + 10);
-        else if (isCorrect && type === "test") setScore(score + 1);
+        if (isCorrect && type === "quiz")
+        {
+            setScore(score + 10);
+            setCorrectAnswers(correctAnswers + 1);
+        }
+        else if (isCorrect && type === "test")
+        {
+            setScore(score + 1);
+            setCorrectAnswers(correctAnswers + 1);
+        }
 
 
         if (currentQuestion < questions.length) setCurrentQuestion(currentQuestion + 1);
-        else addAssessmentData();
+        else
+        {
+            addAssessmentData();
+            setRenderAssessment(false);
+            setRenderResults(true);
+        }
     }
 
     async function addAssessmentData()
@@ -39,9 +56,15 @@ export default function Assessment({ questions, user, type }) {
 
     return (
         <div className={styles.assessment}>
-            <div className={styles.questionCount}>Question {currentQuestion + 1} of {questions.length}</div>
+            {renderAssessment && (
+                <>
+                    <div className={styles.questionCount}>Question {currentQuestion + 1} of {questions.length}</div>
             
-            <Question question={questions[currentQuestion]} onOptionClick={answerOptionClickHandler} />
+                    <Question question={questions[currentQuestion]} onOptionClick={answerOptionClickHandler} />
+                </>               
+            )}
+            {renderResults && <AssessmentResults score={score} correctAnswers={correctAnswers}
+            returntoCategories={returntoCategories} />}
         </div>
     )
 }
