@@ -6,15 +6,10 @@ import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
 import Assessment from './Assessment';
 
 
-export default function AssessmentPage({ flashcards, type, user, returntoCategories }) {
+export default function AssessmentPage({ flashcards, user, returntoCategories }) {
     
     useEffectOnce(() => {
-        if (type === "quiz" && flashcards.length > 10)
-        {
-            randomizeQuizQuestions();
-            randomizeQuestions();
-        }
-        else randomizeQuestions();
+        randomizeQuestions();
         flashcards.forEach(flashcard => randomizeOptions(flashcard.options));
     });
 
@@ -28,21 +23,6 @@ export default function AssessmentPage({ flashcards, type, user, returntoCategor
             flashcards[i] = flashcards[j];
             flashcards[j] = temp;
         }
-    }
-
-    function randomizeQuizQuestions()
-    {
-        const tempArray = [];
-        let length = 10;
-
-        while (length !== 0)
-        {
-            const j = Math.floor(Math.random() * flashcards.length);
-            tempArray.push(flashcards.splice(j, 1));
-            --length;
-        }
-
-        flashcards = tempArray;
     }
 
     function randomizeOptions(options)
@@ -60,7 +40,7 @@ export default function AssessmentPage({ flashcards, type, user, returntoCategor
     return (
         <div className={styles.assessmentPage}>
             <AssessmentsProvider>
-                <Assessment questions={flashcards} user={user} type={type} returntoCategories={returntoCategories} />
+                <Assessment questions={flashcards} user={user} returntoCategories={returntoCategories} />
             </AssessmentsProvider>
         </div>
     )

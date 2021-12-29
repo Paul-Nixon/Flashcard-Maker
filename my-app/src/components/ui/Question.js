@@ -8,7 +8,9 @@ export default function Question({ question, onOptionClick }) {
 
             <div className={styles.choices}>
                 {question.options.map(answerOption => {
-                    return <button className={styles.questionBtn} onClick={onOptionClick}>{answerOption.answerText}</button>
+                    return <button className={styles.questionBtn} onClick={() => {
+                        onOptionClick(answerOption.isCorrect)
+                    }}>{answerOption.answerText}</button>
                 })}
             </div>
 

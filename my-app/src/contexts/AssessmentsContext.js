@@ -4,55 +4,29 @@ import { addDoc, collection, getDocs, query, where, serverTimestamp} from "fireb
 
 
 const AssessmentsContext = React.createContext({
-    addAssessment: (type, assessmentData) => {},
-    fetchAssessmentData: (type, user) => {}
+    addAssessment: (assessmentData) => {},
+    fetchAssessmentData: (user) => {}
 });
 
 
 export function AssessmentsProvider({ children })
 {
-    async function addAssessment(type, assessmentData)
+    async function addAssessment(assessmentData)
     {
-        switch (type)
-        {
-            case "quiz":
-                await addDoc(collection(db, "quizzes"), {
-                    user: assessmentData.user,
-                    score: assessmentData.score,
-                    takenAt: serverTimestamp()
-                });
-                break;
-            case "test":
-                await addDoc(collection(db, "tests"), {
-                    user: assessmentData.user,
-                    score: assessmentData.score,
-                    takenAt: serverTimestamp()
-                });
-                break;
-        }
+        await addDoc(collection(db, "tests"), {
+            user: assessmentData.user,
+            score: assessmentData.score,
+            takenAt: serverTimestamp()
+        });
     }
 
     async function fetchAssessmentData(type, user)
     {
-        let q, querySnapshot, assessments;
+        const q = query(collection(db, "tests"), where("user", "==", user)),
+        querySnapshot = await getDocs(q),
+        assessments = [];
 
-        switch (type)
-        {
-            case "quiz":
-                q = query(collection(db, "quizzes"), where("user", "==", user));
-                querySnapshot = await getDocs(q);
-                assessments = [];
-
-                querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
-                break;
-            case "test":
-                q = query(collection(db, "tests"), where("user", "==", user));
-                querySnapshot = await getDocs(q);
-                assessments = [];
-
-                querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
-                break;
-        }
+        querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
 
         return assessments;
     }

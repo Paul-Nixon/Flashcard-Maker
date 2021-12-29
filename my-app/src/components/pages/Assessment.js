@@ -7,7 +7,7 @@ import AssessmentsContext from '../../contexts/AssessmentsContext';
 import AssessmentResults from './AssessmentResults';
 
 
-export default function Assessment({ questions, user, type, returntoCategories }) {
+export default function Assessment({ questions, user, returntoCategories }) {
         
     const [score, setScore] = useState(0),
     [currentQuestion, setCurrentQuestion] = useState(0),
@@ -19,19 +19,15 @@ export default function Assessment({ questions, user, type, returntoCategories }
 
     function answerOptionClickHandler(isCorrect)
     {
-        if (isCorrect && type === "quiz")
+        if (isCorrect)
         {
-            setScore(score + 10);
-            setCorrectAnswers(correctAnswers + 1);
-        }
-        else if (isCorrect && type === "test")
-        {
-            setScore(score + 1);
+            const percent = (correctAnswers + 1) / questions.length;
+            setScore((percent.toFixed(2) * 100).toFixed());
             setCorrectAnswers(correctAnswers + 1);
         }
 
-
-        if (currentQuestion < questions.length) setCurrentQuestion(currentQuestion + 1);
+        const nextQuestion = currentQuestion + 1;
+        if (nextQuestion < questions.length) setCurrentQuestion(nextQuestion);
         else
         {
             addAssessmentData();
@@ -42,15 +38,7 @@ export default function Assessment({ questions, user, type, returntoCategories }
 
     async function addAssessmentData()
     {
-        switch (type)
-        {
-            case "quiz":
-                assessmentsCtx.addAssessment(type, {user, score});
-                break;
-            case "test":
-                assessmentsCtx.addAssessment(type, {user, score: (score / questions.length).toFixed(1)});
-                break;
-        }
+        assessmentsCtx.addAssessment({user, score});
     }
 
 

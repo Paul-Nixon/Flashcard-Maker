@@ -21,7 +21,6 @@ export default function UserDashboard() {
     const [page, setPage] = useState("homepage"),
     [categoryID, setCategoryID] = useState(""),
     [flashcards, setFlashcards] = useState([]),
-    [assessmentType, setAssessmentType] = useState(""),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext);
 
@@ -55,10 +54,9 @@ export default function UserDashboard() {
         setPage("flashcards");
     }
 
-    function renderAssessmentPage(assessmentType, categoryID)
+    function renderAssessmentPage(categoryID)
     {
         setFlashcards(categoriesCtx.fetchFlashcards(categoryID));
-        setAssessmentType(assessmentType);
         setPage("assessment");
     }
 
@@ -82,8 +80,8 @@ export default function UserDashboard() {
                         <NewFlashcard categoryID={categoryID} />
                     </CategoriesProvider></AuthProvider>}
                 {page === "flashcards" && <FlashcardsPage flashcards={flashcards} />}
-                {page === "assessment" && <AssessmentPage flashcards={flashcards} type={assessmentType}
-                user={currentUser.email} returntoCategories={renderCategoriesPage} />}
+                {page === "assessment" && <AssessmentPage flashcards={flashcards} user={currentUser.email}
+                returntoCategories={renderCategoriesPage} />}
             </div>
         </div>
     )

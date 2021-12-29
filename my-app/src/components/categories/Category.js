@@ -29,24 +29,6 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
         removeModalHandler();
     }
 
-    async function renderQuizInfo()
-    {
-        setModal(<Modal>
-            <div className="modal--flex">
-                You will be taking a quiz with 10 random questions taken from
-                this category.
-                <div className="modal--btn--wrapper">
-                    <button className="modal--btn modal--btn--primary"
-                    onClick={removeModalHandler}>cancel</button>
-                    <button className="modal--btn modal--btn--alt"
-                    onClick={() => renderAssessmentPage("quiz", id)}>start</button>
-                </div>
-            </div>
-        </Modal>)
-        setModalIsRendered(true);
-        setBackdropIsRendered(true);
-    }
-
     async function renderTestInfo()
     {
         setModal(<Modal>
@@ -57,7 +39,7 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
                     <button className="modal--btn modal--btn--primary"
                     onClick={removeModalHandler}>cancel</button>
                     <button className="modal--btn modal--btn--alt"
-                    onClick={() => renderAssessmentPage("test", id)}>start</button>
+                    onClick={() => renderAssessmentPage(id)}>start</button>
                 </div>
             </div>
         </Modal>)
@@ -78,7 +60,6 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
                 <button className={styles.categoryOptionBtn} onClick={() => {
                     renderFlashcardsPage(id);
                 }}>View Flashcards</button>
-                <button className={styles.categoryOptionBtn} onClick={renderQuizInfo}>Take Quiz</button>
                 <button className={styles.categoryOptionBtn} onClick={renderTestInfo}>Take Test</button>
                 <FontAwesomeIcon icon={faTrash} className={styles.categoryTrashBtn} onClick={() => {
                     setModal(<Modal>
