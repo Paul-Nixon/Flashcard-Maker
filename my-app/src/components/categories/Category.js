@@ -39,7 +39,7 @@ export default function Category({ name, renderNewFlashcardPage, renderFlashcard
                     <button className="modal--btn modal--btn--primary"
                     onClick={removeModalHandler}>cancel</button>
                     <button className="modal--btn modal--btn--alt"
-                    onClick={() => renderAssessmentPage(id)}>start</button>
+                    onClick={() => renderAssessmentPage(id, name)}>start</button>
                 </div>
             </div>
         </Modal>)

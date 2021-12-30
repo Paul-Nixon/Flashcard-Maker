@@ -16,11 +16,12 @@ export function AssessmentsProvider({ children })
         await addDoc(collection(db, "tests"), {
             user: assessmentData.user,
             score: assessmentData.score,
+            category: assessmentData.category,
             takenAt: serverTimestamp()
         });
     }
 
-    async function fetchAssessmentData(type, user)
+    async function fetchAssessmentData(user)
     {
         const q = query(collection(db, "tests"), where("user", "==", user)),
         querySnapshot = await getDocs(q),
@@ -28,7 +29,8 @@ export function AssessmentsProvider({ children })
 
         querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
 
-        return assessments;
+        return [assessments[assessments.length - 1], assessments[assessments.length - 2],
+        assessments[assessments.length - 3]];
     }
 
     const value = {

@@ -14,6 +14,7 @@ import CategoriesContext from "../../contexts/CategoriesContext";
 import FlashcardsPage from './FlashcardsPage';
 import useEffectOnce from "../custom_hooks/useEffectOnce";
 import AssessmentPage from './AssessmentPage';
+import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
 
 
 export default function UserDashboard() {
@@ -21,6 +22,7 @@ export default function UserDashboard() {
     const [page, setPage] = useState("homepage"),
     [categoryID, setCategoryID] = useState(""),
     [flashcards, setFlashcards] = useState([]),
+    [categoryName, setCategoryName] = useState(""),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext);
 
@@ -54,9 +56,10 @@ export default function UserDashboard() {
         setPage("flashcards");
     }
 
-    function renderAssessmentPage(categoryID)
+    function renderAssessmentPage(categoryID, categoryName)
     {
         setFlashcards(categoriesCtx.fetchFlashcards(categoryID));
+        setCategoryName(categoryName);
         setPage("assessment");
     }
 
@@ -68,7 +71,9 @@ export default function UserDashboard() {
             </AuthProvider>
 
             <div className={styles.dashboardMainContent}>
-                {page === "homepage" && <UserHomepage />}
+                {page === "homepage" && <AssessmentsProvider><UserHomepage
+                numOfCategories={categoriesCtx.getNumOfCategories()}
+                numOfFlashcards={categoriesCtx.getNumOfFlashcards()} /></AssessmentsProvider>}
                 {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
                     renderNewFlashcardPage={renderNewFlashcardPage}
                     renderFlashcardsPage={renderFlashcardsPage}
@@ -81,7 +86,7 @@ export default function UserDashboard() {
                     </CategoriesProvider></AuthProvider>}
                 {page === "flashcards" && <FlashcardsPage flashcards={flashcards} />}
                 {page === "assessment" && <AssessmentPage flashcards={flashcards} user={currentUser.email}
-                returntoCategories={renderCategoriesPage} />}
+                category={categoryName} returntoCategories={renderCategoriesPage} />}
             </div>
         </div>
     )

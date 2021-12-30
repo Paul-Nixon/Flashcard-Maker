@@ -7,7 +7,7 @@ import AssessmentsContext from '../../contexts/AssessmentsContext';
 import AssessmentResults from './AssessmentResults';
 
 
-export default function Assessment({ questions, user, returntoCategories }) {
+export default function Assessment({ questions, user, category, returntoCategories }) {
         
     const [score, setScore] = useState(0),
     [currentQuestion, setCurrentQuestion] = useState(0),
@@ -38,7 +38,7 @@ export default function Assessment({ questions, user, returntoCategories }) {
 
     async function addAssessmentData()
     {
-        assessmentsCtx.addAssessment({user, score});
+        assessmentsCtx.addAssessment({user, score, category});
     }
 
 

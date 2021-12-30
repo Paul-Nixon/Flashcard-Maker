@@ -9,7 +9,9 @@ const CategoriesContext = React.createContext({
     addFlashcard: (flashcardData, categoryID) => {},
     removeCategory: (categoryName, categoryOwner) => {},
     fetchFlashcards: (categoryName, categoryOwner) => {},
-    fetchAllCategories: (categoryOwner) => {}
+    fetchAllCategories: (categoryOwner) => {},
+    getNumOfCategories: () => {},
+    getNumOfFlashcards: () => {}
 });
 
 
@@ -77,6 +79,22 @@ export function CategoriesProvider({ children })
         setUserCategories(categories);
     }
 
+    function getNumOfCategories()
+    {
+        return userCategories.length;
+    }
+
+    function getNumOfFlashcards()
+    {
+        let total = 0;
+
+        for (let i = 0; i < userCategories.length; i++)
+        {
+            total = total + userCategories[i].flashcards.length;
+        }
+
+        return total;
+    }
 
     const value = {
         userCategories,
@@ -84,7 +102,9 @@ export function CategoriesProvider({ children })
         addFlashcard,
         removeCategory,
         fetchFlashcards,
-        fetchAllCategories
+        fetchAllCategories,
+        getNumOfCategories,
+        getNumOfFlashcards
     };
 
     return (
