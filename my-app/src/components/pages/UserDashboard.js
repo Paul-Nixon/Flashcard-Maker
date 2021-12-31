@@ -15,6 +15,7 @@ import FlashcardsPage from './FlashcardsPage';
 import useEffectOnce from "../custom_hooks/useEffectOnce";
 import AssessmentPage from './AssessmentPage';
 import { AssessmentsProvider } from '../../contexts/AssessmentsContext';
+import AssessmentsContext from '../../contexts/AssessmentsContext';
 
 
 export default function UserDashboard() {
@@ -24,9 +25,14 @@ export default function UserDashboard() {
     [flashcards, setFlashcards] = useState([]),
     [categoryName, setCategoryName] = useState(""),
     { currentUser } = useContext(AuthContext),
-    categoriesCtx = useContext(CategoriesContext);
+    categoriesCtx = useContext(CategoriesContext),
+    assessmentsCtx = useContext(AssessmentsContext),
+    [recentAssessments, setRecentAssessments] = useState([]);
 
-    useEffectOnce(() => categoriesCtx.fetchAllCategories(currentUser.email));
+    useEffectOnce(() => {
+        categoriesCtx.fetchAllCategories(currentUser.email);
+        setRecentAssessments(assessmentsCtx.fetchAssessmentData(currentUser.email));
+    });
     
     
     function renderUserHomepage()
@@ -73,7 +79,8 @@ export default function UserDashboard() {
             <div className={styles.dashboardMainContent}>
                 {page === "homepage" && <AssessmentsProvider><UserHomepage
                 numOfCategories={categoriesCtx.getNumOfCategories()}
-                numOfFlashcards={categoriesCtx.getNumOfFlashcards()} /></AssessmentsProvider>}
+                numOfFlashcards={categoriesCtx.getNumOfFlashcards()}
+                recentAssessments={recentAssessments} /></AssessmentsProvider>}
                 {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
                     renderNewFlashcardPage={renderNewFlashcardPage}
                     renderFlashcardsPage={renderFlashcardsPage}

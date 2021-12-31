@@ -90,7 +90,7 @@ export function CategoriesProvider({ children })
 
         for (let i = 0; i < userCategories.length; i++)
         {
-            total = total + userCategories[i].flashcards.length;
+            total = total + userCategories[i].data.flashcards.length;
         }
 
         return total;

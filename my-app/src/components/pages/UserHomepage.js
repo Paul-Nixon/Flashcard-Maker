@@ -1,16 +1,9 @@
 import styles from './UserHomepage.module.css';
 
-import { useContext } from 'react';
-
 import Card from "../ui/Card";
-import AssessmentsContext from '../../contexts/AssessmentsContext';
 
 
-export default function UserHomepage({numOfCategories, numOfFlashcards}) {
-    
-    const assessmentsCtx = useContext(AssessmentsContext),
-    [firstAssessment, secondAssessment, thirdAssessment] = assessmentsCtx.fetchAssessmentData();
-
+export default function UserHomepage({numOfCategories, numOfFlashcards, recentAssessments}) {
     return (
         <div className={styles.userHomepage}>
             <div className={styles.snapshotData}>
@@ -41,8 +34,6 @@ export default function UserHomepage({numOfCategories, numOfFlashcards}) {
 
                 <div className={styles.dataCardsWrapper}>
                     <Card>
-                        <h3 className={styles.dataSectionSubtitle}>Tests</h3>
-
                         <div className={styles.latestTests}>
                             <div className={styles.infoWrapper}>
                                 <span className={styles.testCategory}>Category</span>
