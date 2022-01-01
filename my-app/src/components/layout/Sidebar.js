@@ -67,12 +67,6 @@ export default function Sidebar(props) {
                         <FontAwesomeIcon icon={faList} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Categories</span>
                     </li>
-                    <li className="sidebarListItem" ref={quizzesAndTestsLinkRef} onClick={() => {
-                        changeActiveLink(quizzesAndTestsLinkRef);
-                    }}>
-                        <FontAwesomeIcon icon={faPencilAlt} fixedWidth className="sidebarListIcon" />
-                        <span className="sidebarListText">Quizzes &amp; Tests</span>
-                    </li>
                     <li className="sidebarListItem" ref={LogoutLinkRef} onClick={logoutHandler}>
                         <FontAwesomeIcon icon={faSignOutAlt} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Log Out</span>
