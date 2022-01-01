@@ -1,7 +1,7 @@
 import './Sidebar.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faHome, faList, faPencilAlt, faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faList, faPencilAlt, faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 
@@ -13,7 +13,6 @@ export default function Sidebar(props) {
     const homeLinkRef = useRef(),
     categoriesLinkRef = useRef(),
     quizzesAndTestsLinkRef = useRef(),
-    SettingsLinkRef = useRef(),
     LogoutLinkRef = useRef(),
     [activeLink, setActiveLink] = useState(homeLinkRef),
     { logoutUser, currentUser } = useContext(AuthContext),
@@ -73,12 +72,6 @@ export default function Sidebar(props) {
                     }}>
                         <FontAwesomeIcon icon={faPencilAlt} fixedWidth className="sidebarListIcon" />
                         <span className="sidebarListText">Quizzes &amp; Tests</span>
-                    </li>
-                    <li className="sidebarListItem" ref={SettingsLinkRef} onClick={() => {
-                        changeActiveLink(SettingsLinkRef);
-                    }}>
-                        <FontAwesomeIcon icon={faCog} fixedWidth className="sidebarListIcon" />
-                        <span className="sidebarListText">Settings</span>
                     </li>
                     <li className="sidebarListItem" ref={LogoutLinkRef} onClick={logoutHandler}>
                         <FontAwesomeIcon icon={faSignOutAlt} fixedWidth className="sidebarListIcon" />

@@ -24,31 +24,6 @@
     margin-right: 1rem;
 }
 
-.websiteLinks
-{
-    display: flex;
-    align-items: center;
-    margin-right: 0.5rem;
-}
-
-.websiteLink
-{
-    font-size: 0.9375rem;
-    color: white;
-    font-weight: bold;
-    padding: 0.5rem;
-}
-
-.websiteLink:hover
-{
-    text-decoration: underline;
-}
-
-.websiteLink + .websiteLink
-{
-    margin-left: 0.5rem;
-}
-
 .accountLinks
 {
     display: flex;

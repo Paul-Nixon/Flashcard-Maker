@@ -11,18 +11,19 @@
 .homepageMainContent
 {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0 2.5rem;
-    height: 100%;
+    height: 80%;
 }
 
 .cta
 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
 }
 
 .ctaTitle
@@ -36,7 +37,7 @@
 
 .ctaSubtitle
 {
-    color: brown;
+    color: white;
     font-size: clamp(1.125rem, 2vw, 2rem);
     text-align: left;
     margin-bottom: 1rem;
@@ -54,11 +55,4 @@
 .ctaBtn:hover
 {
     background-color: darkblue;
-}
-
-.homepageImg
-{
-    width: 12.5rem;
-    height: 12.5rem;
-
 }

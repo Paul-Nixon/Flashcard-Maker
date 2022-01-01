@@ -13,14 +13,12 @@ export default function WebsiteHomepage() {
                 <div className={styles.cta}>
                     <h1 className={styles.ctaTitle}>Create Your Own Flashcards</h1>
                     <p className={styles.ctaSubtitle}>
-                        This is a placeholder subtitle
+                        Make flashcards &amp; take tests using them
                     </p>
                     <Link to="/register">
                         <button className={styles.ctaBtn}>Get Started</button>
                     </Link>
                 </div>
-
-                <div className={styles.homepageImg}></div>
             </div>
         </div>
     )

@@ -10,15 +10,6 @@ export default function HomepageHeader() {
             </Link>
 
             <div className={styles.internalLinks}>
-                <div className={styles.websiteLinks}>
-                    <Link to="/about">
-                        <span className={styles.websiteLink}>About</span>
-                    </Link>
-                    <Link to="/contact">
-                        <span className={styles.websiteLink}>Contact</span>
-                    </Link>
-                </div>
-
                 <div className={styles.accountLinks}>
                     <Link to="/login">
                         <button data-login className={styles.headerBtn}>Login</button>

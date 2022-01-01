@@ -26,13 +26,9 @@ export default function UserDashboard() {
     [categoryName, setCategoryName] = useState(""),
     { currentUser } = useContext(AuthContext),
     categoriesCtx = useContext(CategoriesContext),
-    assessmentsCtx = useContext(AssessmentsContext),
-    [recentAssessments, setRecentAssessments] = useState([]);
+    assessmentsCtx = useContext(AssessmentsContext);
 
-    useEffectOnce(() => {
-        categoriesCtx.fetchAllCategories(currentUser.email);
-        setRecentAssessments(assessmentsCtx.fetchAssessmentData(currentUser.email));
-    });
+    useEffectOnce(() => categoriesCtx.fetchAllCategories(currentUser.email));
     
     
     function renderUserHomepage()
@@ -80,7 +76,7 @@ export default function UserDashboard() {
                 {page === "homepage" && <AssessmentsProvider><UserHomepage
                 numOfCategories={categoriesCtx.getNumOfCategories()}
                 numOfFlashcards={categoriesCtx.getNumOfFlashcards()}
-                recentAssessments={recentAssessments} /></AssessmentsProvider>}
+                testsPassed={assessmentsCtx.getNumOfTestsPassed(currentUser.email)} /></AssessmentsProvider>}
                 {page === "categories" && <CategoriesPage renderNewCategoryPage={renderNewCategoryPage} 
                     renderNewFlashcardPage={renderNewFlashcardPage}
                     renderFlashcardsPage={renderFlashcardsPage}

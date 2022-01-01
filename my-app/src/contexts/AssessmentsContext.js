@@ -5,7 +5,7 @@ import { addDoc, collection, getDocs, query, where, serverTimestamp} from "fireb
 
 const AssessmentsContext = React.createContext({
     addAssessment: (assessmentData) => {},
-    fetchAssessmentData: (user) => {}
+    getNumOfTestsPassed: (user) => {}
 });
 
 
@@ -21,7 +21,7 @@ export function AssessmentsProvider({ children })
         });
     }
 
-    async function fetchAssessmentData(user)
+    async function getNumOfTestsPassed(user)
     {
         const q = query(collection(db, "tests"), where("user", "==", user)),
         querySnapshot = await getDocs(q),
@@ -29,13 +29,12 @@ export function AssessmentsProvider({ children })
 
         querySnapshot.docs.forEach(doc => {assessments.push({id: doc.id, data: doc.data()})});
 
-        return [assessments[assessments.length - 1], assessments[assessments.length - 2],
-        assessments[assessments.length - 3]];
+        return assessments.length;
     }
 
     const value = {
         addAssessment,
-        fetchAssessmentData
+        getNumOfTestsPassed
     };
 
     return (
