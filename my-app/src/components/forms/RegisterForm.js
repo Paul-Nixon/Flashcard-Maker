@@ -18,6 +18,7 @@ export default function RegisterForm() {
     [renderModal, setRenderModal] = useState(false),
     [renderBackdrop, setRenderBackdrop] = useState(false),
     [emailIsValid, setEmailIsValid] = useState(false),
+    [modal, setModal] = useState(<Modal />),
     [passwordIsValid, setPasswordIsValid] = useState(false),
     [confirmPasswordIsValid, setConfirmPasswordIsValid] = useState(false),
     authCtx = useContext(AuthContext);
@@ -33,26 +34,26 @@ export default function RegisterForm() {
         {
             authCtx.addUser(emailInputRef.current.value, passwordInputRef.current.value);
 
-            modal = <Modal>
+            setModal(<Modal>
                 New account created!
                 <span className="close" onClick={() => {
                     setRenderModal(false);
                     setRenderBackdrop(false);
                 }}>&times;</span>
-            </Modal>
+            </Modal>);
             setRenderModal(true);
             setRenderBackdrop(true);
             event.target.reset();
         }
         else
         {
-            modal = <Modal>
+            setModal(<Modal>
                     One or more of the fields is incorrectly filled.
                     <span className="close" onClick={() => {
                         setRenderModal(false);
                         setRenderBackdrop(false);
                     }}>&times;</span>
-                </Modal>
+                </Modal>);
             setRenderModal(true);
             setRenderBackdrop(true);
         }

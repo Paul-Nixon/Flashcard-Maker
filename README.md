@@ -1,5 +1,5 @@
 # **Description**
-This project is the first one I've created using React, so I thought it'd be important to focus on making something valuable to others. After four arduous months, I've finally built something that's ultimately half-baked but still rewarding. Please watch the [Youtube video](g) on this project to learn more about it and my thoughts on it as a whole. Also, if you enjoyed the video, please like, share, & share it to support me.
+This project is the first one I've created using React, so I thought it'd be important to focus on making something valuable to others. After four arduous months, I've finally built something that's ultimately half-baked but still rewarding. Please watch the [Youtube video](https://youtu.be/cEwRNUmiONE) on this project to learn more about it and my thoughts on it as a whole. Also, if you enjoyed the video, please like, comment, & share it to support me.
 
 Newfound skills:
 * Transferring data to/from a database
